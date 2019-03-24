@@ -1,0 +1,50 @@
+openapi: "3.0.0"
+
+info:
+  title: Memstack API
+  description: Proposed Memstack API
+  version: 0.1.0
+
+paths:
+  /decks:
+    post:
+      description: Create a new deck
+      responses:
+        200:
+          description: Succesfully created a new deck 
+    get:
+      description: Get all decks for the current user
+      responses:
+        200:
+          description: Succesfully got decks for user
+  /decks/{deckId}:
+    get:
+      description: Get a deck by ID
+      parameters:
+        - name: deckId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Succesfully got deck by ID
+          
+  /decks/{deckId}/cards:
+    parameters:
+      - name: deckId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get the cards associated with a deck
+      responses:
+        200:
+          description: Succesfully got cards in deck
+    post:
+      description: Add a card to deck
+      responses:
+        200:
+          description: Added a card to the deck
+    
