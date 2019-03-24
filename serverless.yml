@@ -2,9 +2,13 @@ service: memstack
 
 frameworkVersion: ">=1.28.0 <2.0.0"
 
+plugins:
+  - serverless-domain-manager
+
 provider:
   name: aws
   runtime: go1.x
+  profile: memstack
   environment:
     TABLE_NAME: Memstack
   apiKeys:
@@ -61,3 +65,10 @@ resources:
             KeyType: HASH
           - AttributeName: sort
             KeyType: RANGE
+
+custom:
+  customDomain:
+    domainName: memstack.io
+    basePath: '/api'
+    stage: ${self:provider.stage}
+    createRoute53Record: true
