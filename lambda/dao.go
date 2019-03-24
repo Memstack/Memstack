@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"errors"
 	"os"
+	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
@@ -34,26 +35,26 @@ type Response events.APIGatewayProxyResponse
 // Request is better
 type Request events.APIGatewayProxyRequest
 
-func getCard(front string) (card, error) {
+func getCard(id string) (cardToSave, error) {
 	sess := session.Must(session.NewSession())
 	svc := dynamodb.New(sess)
 
-	card := card{}
-
 	fmt.Println("Trying to read from table: ", os.Getenv("TABLE_NAME"))
 
-	params := &dynamodb.GetItemInput{
+	result, err := svc.GetItem(&dynamodb.GetItemInput{
 		TableName: aws.String(os.Getenv("TABLE_NAME")),
 		Key: map[string]*dynamodb.AttributeValue{
-			"front": {
-				S: aws.String(front),
+			"partition": {
+				S: aws.String(id),
+			},
+			"sort": {
+				S: aws.String("0987654321:1234567890"),
 			},
 		},
-	}
-
-	result, err := svc.GetItem(params)
-
+	})
+	card := cardToSave{}
 	if result.Item == nil {
+		log.Print("Result", result)
 		return card, errors.New("Failed to find card")
 	}
 
@@ -71,8 +72,8 @@ func getCard(front string) (card, error) {
 		fmt.Println(err.Error())
 		return card, err
 	}
-
-	return card, nil
+	log.Print(card)
+	return card, err
 }
 
 func createNewCard(body card) (cardToSave, error) {
