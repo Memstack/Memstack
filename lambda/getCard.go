@@ -17,17 +17,14 @@ type APIError struct {
 }
 
 // Handler is our lambda handler invoked by the `lambda.Start` function call
-func Handler(request Request) (Response, error) {
-	cardFront := request.PathParameters["front"]
+func GetCardHandler(request Request) (Response, error) {
+	id := request.PathParameters["id"]
 
-	card, err := getCard(cardFront)
+	card, err := getCard(id)
 
 	if err != nil {
-		apiError := APIError{
-			Message: "Could not find the specified card",
-		}
 
-		apiErrorJSON, _ := json.Marshal(apiError)
+		apiErrorJSON, _ := json.Marshal(err.Error())
 
 		resp := Response{
 			StatusCode: 404,
@@ -51,5 +48,5 @@ func Handler(request Request) (Response, error) {
 }
 
 func main() {
-	lambda.Start(Handler)
+	lambda.Start(GetCardHandler)
 }

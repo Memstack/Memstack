@@ -21,7 +21,7 @@ func CreateCardHandler(request Request) (Response, error) {
 	}
 
 	fmt.Println("Created new card", item)
-	result, _ := json.Marshal(card)
+	result, _ := json.Marshal(item)
 	return Response{Body: string(result), StatusCode: 200}, nil
 }
 
