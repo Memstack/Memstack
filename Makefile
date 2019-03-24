@@ -1,5 +1,5 @@
 
-go_apps = bin/getCard bin/createCard
+go_apps = bin/getCard
 
 bin/% : lambda/%.go lambda/dao.go
 	export GO111MODULE=on

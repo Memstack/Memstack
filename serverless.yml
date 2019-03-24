@@ -2,13 +2,13 @@ service: memstack
 
 frameworkVersion: ">=1.28.0 <2.0.0"
 
-plugins:
-  - serverless-domain-manager
+# plugins:
+#   - serverless-domain-manager
 
 provider:
   name: aws
   runtime: go1.x
-  profile: memstack
+  # profile: memstack
   environment:
     TABLE_NAME: Memstack
   apiKeys:
@@ -33,18 +33,18 @@ package:
     - ./bin/**
 
 functions:
-  createCard:
-    handler: bin/createCard
-    events:
-      - http:
-          path: cards
-          method: post
-          private: true
-  getCard:
+  # createCard:
+  #   handler: bin/createCard
+  #   events:
+  #     - http:
+  #         path: decks/{deckId}
+  #         method: post
+  #         private: true
+  getCardsInDeck:
     handler: bin/getCard
     events:
       - http:
-          path: cards/{id}
+          path: decks/{deckId}/cards
           method: get
           private: true
 
@@ -56,19 +56,27 @@ resources:
         TableName: Memstack
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
-          - AttributeName: partition
+          - AttributeName: DeckOrUserId
             AttributeType: S
-          - AttributeName: sort
+          - AttributeName: UserDeckCard
+            AttributeType: S
+          - AttributeName: UserId
             AttributeType: S
         KeySchema:
-          - AttributeName: partition
+          - AttributeName: DeckOrUserId
             KeyType: HASH
-          - AttributeName: sort
+          - AttributeName: UserDeckCard
             KeyType: RANGE
-
-custom:
-  customDomain:
-    domainName: memstack.io
-    basePath: '/api'
-    stage: ${self:provider.stage}
-    createRoute53Record: true
+        GlobalSecondaryIndexes:
+          - IndexName: UserId-index
+            KeySchema:
+              - AttributeName: UserId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+# custom:
+#   customDomain:
+#     domainName: memstack.io
+#     basePath: "/api"
+#     stage: ${self:provider.stage}
+#     createRoute53Record: true

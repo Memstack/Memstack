@@ -1,29 +1,37 @@
 package main
 
 import (
-	"fmt"
 	"errors"
-	"os"
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/nu7hatch/gouuid"
 )
 
-type card struct {
-	Front string `json:"front"`
-	Back  string `json:"back"`
+// Card is what it says on the tin
+type Card struct {
+	*Item
+	Front string `json:"Front"`
+	Back  string `json:"Back"`
 }
 
-type cardToSave struct {
-	Partition string `json:"partition"`
-	Sort      string `json:"sort"`
-	Front     string `json:"front"`
-	Back      string `json:"back"`
+// Deck contains a collection of cards
+type Deck struct {
+	*Item
+	UserID string `json:"UserId"`
+	Title  string `json:"Title"`
+}
+
+// Item is the base DynamoDB item
+type Item struct {
+	DeckOrUserID string `json:"DeckOrUserId"`
+	UserDeckCard string `json:"UserDeckCard"`
+	UserID       string `json:"UserId"`
 }
 
 // Response is of type APIGatewayProxyResponse since we're leveraging the
@@ -35,27 +43,45 @@ type Response events.APIGatewayProxyResponse
 // Request is better
 type Request events.APIGatewayProxyRequest
 
-func getCard(id string) (cardToSave, error) {
+func getDeck(deckID string) (Deck, error) {
+	return Deck{}, nil
+}
+
+func getCardsInDeck(deckID string) ([]Card, error) {
 	sess := session.Must(session.NewSession())
 	svc := dynamodb.New(sess)
 
 	fmt.Println("Trying to read from table: ", os.Getenv("TABLE_NAME"))
 
-	result, err := svc.GetItem(&dynamodb.GetItemInput{
+	queryInput := &dynamodb.QueryInput{
 		TableName: aws.String(os.Getenv("TABLE_NAME")),
-		Key: map[string]*dynamodb.AttributeValue{
-			"partition": {
-				S: aws.String(id),
+		KeyConditions: map[string]*dynamodb.Condition{
+			"DeckOrUserId": {
+				ComparisonOperator: aws.String("EQ"),
+				AttributeValueList: []*dynamodb.AttributeValue{
+					{
+						S: aws.String(deckID),
+					},
+				},
 			},
-			"sort": {
-				S: aws.String("0987654321:1234567890"),
+			"UserDeckCard": {
+				ComparisonOperator: aws.String("BEGINS_WITH"),
+				AttributeValueList: []*dynamodb.AttributeValue{
+					{
+						S: aws.String("Card"),
+					},
+				},
 			},
 		},
-	})
-	card := cardToSave{}
-	if result.Item == nil {
+	}
+
+	result, err := svc.Query(queryInput)
+
+	cards := []Card{}
+
+	if result.Items == nil {
 		log.Print("Result", result)
-		return card, errors.New("Failed to find card")
+		return cards, errors.New("Failed to find card")
 	}
 
 	fmt.Println("Result", result)
@@ -63,52 +89,15 @@ func getCard(id string) (cardToSave, error) {
 	if err != nil {
 		fmt.Println("Query API call failed:")
 		fmt.Println((err.Error()))
-		return card, err
+		return cards, err
 	}
 
-	err = dynamodbattribute.UnmarshalMap(result.Item, &card)
+	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &cards)
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return card, err
+		return cards, err
 	}
-	log.Print(card)
-	return card, err
-}
-
-func createNewCard(body card) (cardToSave, error) {
-	sess := session.Must(session.NewSession())
-	svc := dynamodb.New(sess)
-
-	u, err := uuid.NewV4()
-
-	cardToSave := cardToSave{
-		Front: body.Front,
-		Back: body.Back,
-		Partition: fmt.Sprintf("card_%s", u),
-		Sort: fmt.Sprintf("0987654321:1234567890"),
-	}
-
-	fmt.Println("card to add", cardToSave)
-
-	av, err := dynamodbattribute.MarshalMap(cardToSave)
-
-	if err != nil {
-		fmt.Println("Got error marshalling map:")
-		fmt.Println(err.Error())
-		return cardToSave, err
-	}
-
-	input := &dynamodb.PutItemInput{
-		Item:      av,
-		TableName: aws.String(os.Getenv("TABLE_NAME")),
-	}
-
-	_, err = svc.PutItem(input)
-
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	return cardToSave, err
+	log.Print(cards)
+	return cards, err
 }
