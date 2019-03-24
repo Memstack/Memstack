@@ -1,0 +1,29 @@
+@import "../../scss/index.scss";
+
+.side-menu {
+  position: fixed;
+  background-color: $primary-color;
+  color: $white;
+  height: 100%;
+  min-width: 48.516px;
+
+  text-align: center;
+
+  a,
+  a:hover {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  .item {
+    padding-top: 10px;
+    width: 100%;
+    height: 2.66em;
+
+    &:hover {
+      // background-color: #17bbb3;
+      background-color: $sidebar-hover-color;
+      transition: background 1s ease;
+    }
+  }
+}

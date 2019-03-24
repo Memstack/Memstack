@@ -1,0 +1,14 @@
+@import "../scss/media";
+@import "../scss/variables";
+
+.flex {
+  display: flex;
+}
+
+#content {
+  width: 100%;
+
+  padding-top: 0;
+  padding-right: 0;
+
+}

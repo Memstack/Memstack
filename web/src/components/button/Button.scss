@@ -1,0 +1,37 @@
+@import "../../scss/media"; 
+@import "../../scss/variables";
+
+.Button {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  height: 2.5rem;
+  // padding: 0.5rem 0;
+  border: none;
+  border-radius: 5px 5px;
+
+  width: 100%;
+
+  @include media-query(small) {
+    width: 8rem;
+  }
+
+  .icon {
+    float: right;
+    background-color: rgba(0, 0, 0, 0.05);
+    height: 100%;
+    width: 2.5rem;
+  }
+
+  .text {
+    height: 100%;
+    align-self: center;
+    position: relative;
+
+    top: calc(50% - 0.8em);
+  }
+
+  .text.bold {
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,13 @@
+@import "../../scss/media";
+@import "../../scss/variables";
+
+.add-card {
+  width: 80%;
+  margin: 1.5rem auto;
+
+  padding-bottom: $bottom-nav-height;
+
+  @include media-query(small) {
+    padding: 0 4rem;
+  }
+}
