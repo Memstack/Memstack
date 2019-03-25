@@ -1,0 +1,23 @@
+{
+  "name": "Memstack",
+  "version": "1.0.0",
+  "description": "A flash card app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Memstack/Memstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Memstack/Memstack/issues"
+  },
+  "homepage": "https://github.com/Memstack/Memstack#readme",
+  "devDependencies": {
+    "serverless-domain-manager": "^3.2.1"
+  }
+}
