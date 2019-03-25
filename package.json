@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Memstack/Memstack#readme",
   "devDependencies": {
     "serverless-domain-manager": "^3.2.1"
+  },
+  "dependencies": {
+    "serverless-finch": "^2.4.2"
   }
 }
