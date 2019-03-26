@@ -12,11 +12,11 @@ clean:
 
 
 deploy-web: clean build
-	sls  client deploy
+	echo "Deploying client..."
+	sls client deploy
 
 deploy-stack: clean build
+	echo "Deploying stack..."
 	sls deploy --verbose 
 
-deploy: clean build
-	sls deploy --verbose 
-	sls  client deploy 
+deploy: deploy-stack deploy-web
