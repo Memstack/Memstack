@@ -7,11 +7,16 @@ bin/% : lambda/%.go lambda/dao.go
 
 build: $(go_apps)
 
+build-web:
+	cd web && yarn install && yarn build
+
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
+clean-web:
+	rm -rf ./web/build
 
-deploy-web: clean build
+deploy-web: clean-web build-web
 	echo "Deploying client..."
 	sls client deploy
 
