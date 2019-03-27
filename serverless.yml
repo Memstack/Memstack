@@ -2,13 +2,13 @@ service: memstack
 
 frameworkVersion: ">=1.28.0 <2.0.0"
 
-# plugins:
-#   - serverless-domain-manager
+plugins:
+  - serverless-finch
 
 provider:
   name: aws
   runtime: go1.x
-  # profile: memstack
+  profile: memstack
   environment:
     TABLE_NAME: Memstack
   apiKeys:
@@ -41,7 +41,7 @@ functions:
   #         method: post
   #         private: true
   getCardsInDeck:
-    handler: bin/getCard
+    handler: bin/getCards
     events:
       - http:
           path: decks/{deckId}/cards
@@ -49,34 +49,13 @@ functions:
           private: true
 
 resources:
-  Resources:
-    MemstackTable:
-      Type: "AWS::DynamoDB::Table"
-      Properties:
-        TableName: Memstack
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: DeckOrUserId
-            AttributeType: S
-          - AttributeName: UserDeckCard
-            AttributeType: S
-          - AttributeName: UserId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: DeckOrUserId
-            KeyType: HASH
-          - AttributeName: UserDeckCard
-            KeyType: RANGE
-        GlobalSecondaryIndexes:
-          - IndexName: UserId-index
-            KeySchema:
-              - AttributeName: UserId
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
-# custom:
-#   customDomain:
-#     domainName: memstack.io
-#     basePath: "/api"
-#     stage: ${self:provider.stage}
-#     createRoute53Record: true
+  # DynamoDB
+  - ${file(resources/dynamodb-table.yml)}
+  # S3
+  - ${file(resources/s3-bucket.yml)}
+
+custom:
+  siteBucketName: dev.memstack.io
+  client:
+    bucketName: dev.memstack.io
+    distributionFolder: web/build/

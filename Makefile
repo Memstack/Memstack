@@ -10,5 +10,13 @@ build: $(go_apps)
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
-deploy: clean build
-	sls deploy --verbose
+
+deploy-web: clean build
+	echo "Deploying client..."
+	sls client deploy
+
+deploy-stack: clean build
+	echo "Deploying stack..."
+	sls deploy --verbose 
+
+deploy: deploy-stack deploy-web

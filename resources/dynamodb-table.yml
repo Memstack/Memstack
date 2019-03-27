@@ -1,0 +1,16 @@
+Resources:
+    MemstackTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: Memstack
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: partition
+            AttributeType: S
+          - AttributeName: sort
+            AttributeType: S
+        KeySchema:
+          - AttributeName: partition
+            KeyType: HASH
+          - AttributeName: sort
+            KeyType: RANGE

@@ -1,0 +1,48 @@
+// Import the initial variables
+@import "media";
+@import "variables";
+
+#root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  // @media screen and (device-aspect-ratio: 40/71) {
+  //   height: 130vh;
+  // }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.hide-mobile {
+  display: none !important;
+  @include media-query(small) {
+    display: inline-block !important;
+  }
+}
+
+.mobile-only {
+  display: inline-block !important;
+  @include media-query(small) {
+    display: none !important;
+  }
+}
+
+a,
+a:hover {
+  color: $white !important;
+  text-decoration: none;
+}

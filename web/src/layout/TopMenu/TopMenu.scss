@@ -1,0 +1,85 @@
+@import "../../scss/index.scss";
+
+.Navbar {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 30;
+
+  background-color: $navbar-color;
+
+  .secondary {
+    width: 100%;
+    background-color: $primary-color;
+  }
+
+  .icon {
+    margin-left: 0;
+    padding-right: 0;
+    @include media-query(small) {
+      margin-left: 7px;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .account-icon {
+    margin-right: 0;
+    @include media-query(small) {
+      margin-right: 5px;
+    }
+  }
+
+  .menu-text {
+    float: right;
+  }
+
+  a,
+  a:hover {
+    color: white !important;
+    text-decoration: none;
+  }
+
+  .main {
+    width: 100%;
+
+    height: $navbar-mobile-height;
+    @include media-query(small) {
+      height: $navbar-height;
+    }
+    display: flex;
+
+    justify-content: center;
+
+    @include media-query(small) {
+      justify-content: space-between;
+    }
+
+    img {
+      height: 1.75rem;
+      min-width: 1.75rem;
+      align-self: center;
+    }
+
+    .right {
+      display: none;
+
+      @include media-query(small) {
+        display: flex;
+      }
+    }
+
+    .item {
+      height: 100%;
+      padding: 0 0.85rem;
+      align-items: center;
+      display: flex;
+      color: white;
+
+      &:hover {
+        background-color: #2b2c2e;
+        transition: background 1s ease;
+      }
+    }
+  }
+}
