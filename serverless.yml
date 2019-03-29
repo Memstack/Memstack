@@ -54,6 +54,8 @@ resources:
   - Resources:
       ApiGatewayRestApi:
         Type: AWS::ApiGateway::RestApi
+        Properties:
+          Name: memstack-api-${self:provider.stage}
 
   - ${file(resources/dynamodb-table.yml)}
   - ${file(resources/s3-bucket.yml)}
