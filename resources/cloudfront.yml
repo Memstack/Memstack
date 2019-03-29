@@ -23,12 +23,12 @@ Resources:
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2018
         Enabled: true
-  # CloudFrontDNSRecord:
-  #   Type: AWS::Route53::RecordSet
-  #   Properties:
-  #     HostedZoneName: memstack.io
-  #     Name: dev.memstack.io
-  #     Type: A
-  #     AliasTarget:
-  #       DNSName: !GetAtt CloudFrontDistribution.DomainName
-  #       HostedZoneId: "Z2FDTNDATAQYW2" # Global HostedZone for CloudFront distrobutions
+  CloudFrontDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: memstack.io.
+      Name: dev.memstack.io
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFrontDistribution.DomainName
+        HostedZoneId: "Z2FDTNDATAQYW2" # Global HostedZone for CloudFront distrobutions
