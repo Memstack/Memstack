@@ -5,24 +5,39 @@ Resources:
       DistributionConfig:
         Aliases:
           - dev.memstack.io
+        DefaultRootObject: index.html
         HttpVersion: http2
         DefaultCacheBehavior:
           TargetOriginId: "static-web"
           ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - HEAD
+            - GET
+          Compress: true
           ForwardedValues:
+            Headers:
+              - Accept
             QueryString: true
+          MinTTL: 0
+          MaxTTL: 3600
+          DefaultTTL: 300
         Origins:
           - Id: "static-web"
-            DomainName: ${self:custom.siteBucketName}
+            DomainName: !GetAtt StaticSite.DomainName
             CustomOriginConfig:
               OriginProtocolPolicy: http-only
-
         ViewerCertificate:
           # TODO: Paremeterise this
           AcmCertificateArn: "arn:aws:acm:us-east-1:145787944847:certificate/324c6bce-4ff3-4f17-9ed7-6764f6df7b04"
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2018
         Enabled: true
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: "/index.html"
+            ErrorCachingMinTTL: 0
+
   CloudFrontDNSRecord:
     Type: AWS::Route53::RecordSet
     Properties:
