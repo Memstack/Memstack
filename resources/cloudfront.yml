@@ -2,8 +2,10 @@ Resources:
   CloudFrontDistribution:
     Type: "AWS::CloudFront::Distribution"
     Properties:
-      DistributionConfig: #required
-        Aliases: dev.memstack.io
+      DistributionConfig:
+        Aliases:
+          - dev.memstack.io
+        HttpVersion: http2
         DefaultCacheBehavior:
           TargetOriginId: "static-web"
           ViewerProtocolPolicy: redirect-to-https
@@ -18,6 +20,8 @@ Resources:
         ViewerCertificate:
           # TODO: Paremeterise this
           AcmCertificateArn: "arn:aws:acm:us-east-1:145787944847:certificate/324c6bce-4ff3-4f17-9ed7-6764f6df7b04"
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2018
         Enabled: true
 
   CloudFrontDNSRecord:
