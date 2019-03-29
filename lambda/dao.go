@@ -16,20 +16,20 @@ import (
 // Card is what it says on the tin
 type Card struct {
 	*Item
-	Front string `json:"front"`
-	Back  string `json:"back"`
+	Front string `json:"Front"`
+	Back  string `json:"Back"`
 }
 
 // Deck contains a collection of cards
 type Deck struct {
 	*Item
-	Title string `json:"title"`
+	Title string `json:"Title"`
 }
 
 // Item is the base DynamoDB item
 type Item struct {
-	DeckOrUserID string `json:"id"`
-	UserDeckCard string `json:"userDeckCard"`
+	DeckId       string `json:"DeckId"`
+	CardDeckInfo string `json:"CardDeckInfo"`
 }
 
 // Response is of type APIGatewayProxyResponse since we're leveraging the
@@ -62,7 +62,7 @@ func getCardsInDeck(deckID string) ([]Card, error) {
 					},
 				},
 			},
-			"CardDeck": {
+			"CardDeckInfo": {
 				ComparisonOperator: aws.String("BEGINS_WITH"),
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{
