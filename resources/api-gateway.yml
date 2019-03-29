@@ -1,0 +1,55 @@
+Resources:
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: memstack-api-${self:provider.stage}
+      Description: "The Memstack API"
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+
+  # ApiGatewayBasePathMapping:
+  #   Type: AWS::ApiGateway::BasePathMapping
+  #   Properties:
+  #     DomainName: !Ref ApiGatewayDomainName
+  #     RestApiId: !Ref ApiGatewayRestApi
+  #     Stage: ${self:provider.stage}
+  #     BasePath: api
+
+  ApiGatewayRestApiCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName:
+        Fn::Join:
+          - "."
+          - - "api"
+            - ${self:provider.stage}
+            - "memstack.io"
+      ValidationMethod: DNS
+  # ApiGatewayDNSRecord:
+  #   Type: AWS::Route53::RecordSet
+  #   Properties:
+  #     HostedZoneName: memstack.io.
+  #     Name:
+  #       Fn::Join:
+  #         - "."
+  #         - - "api"
+  #           - ${self:provider.stage}
+  #           - "memstack.io"
+  #     Type: A
+  #     AliasTarget:
+  #       DNSName: !GetAtt ApiGatewayDomainName.RegionalDomainName
+  #       HostedZoneId: !GetAtt ApiGatewayDomainName.RegionalHostedZoneId
+  # ApiGatewayDomainName:
+  #   Type: AWS::ApiGateway::DomainName
+  #   Properties:
+  #     RegionalCertificateArn: !Ref ApiGatewayRestApiCertificate
+  #     DomainName:
+  #       Fn::Join:
+  #         - "."
+  #         - - "api"
+  #           - ${self:provider.stage}
+  #           - "memstack.io"
+  #     EndpointConfiguration:
+  #       Types:
+  #         - REGIONAL
