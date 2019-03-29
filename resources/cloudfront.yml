@@ -21,11 +21,40 @@ Resources:
           MinTTL: 0
           MaxTTL: 3600
           DefaultTTL: 300
+        CacheBehaviors:
+          - PathPattern: /api/*
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            ForwardedValues:
+              Headers:
+                - Accept
+              QueryString: true
+            MinTTL: 0
+            MaxTTL: 3600
+            DefaultTTL: 300
+            ViewerProtocolPolicy: redirect-to-https
+            TargetOriginId: "api-gateway"
         Origins:
           - Id: "static-web"
             DomainName: !GetAtt StaticSite.DomainName
             CustomOriginConfig:
               OriginProtocolPolicy: http-only
+          - Id: "api-gateway"
+            DomainName:
+              Fn::Join:
+                - ""
+                - - Ref: ApiGatewayRestApi
+                  - ".execute-api.${self:provider.region}.amazonaws.com"
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols:
+                - TLSv1.2
         ViewerCertificate:
           # TODO: Paremeterise this
           AcmCertificateArn: "arn:aws:acm:us-east-1:145787944847:certificate/324c6bce-4ff3-4f17-9ed7-6764f6df7b04"
