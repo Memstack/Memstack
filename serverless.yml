@@ -41,10 +41,10 @@ functions:
   #         method: post
   #         private: true
   getCardsInDeck:
-    handler: bin/getCards
+    handler: bin/getDeck
     events:
       - http:
-          path: decks/{deckId}/cards
+          path: decks/{deckId}
           method: get
           private: true
 
