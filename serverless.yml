@@ -49,13 +49,13 @@ functions:
           private: true
 
 resources:
-  # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
-  # S3
   - ${file(resources/s3-bucket.yml)}
+  - ${file(resources/cloudfront.yml)}
 
 custom:
   siteBucketName: dev.memstack.io
   client:
+    manageResources: false
     bucketName: dev.memstack.io
     distributionFolder: web/build/

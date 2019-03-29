@@ -1,0 +1,31 @@
+Resources:
+  CloudFrontDistribution:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig: #required
+        Aliases: dev.memstack.io
+        DefaultCacheBehavior:
+          TargetOriginId: "static-web"
+          ViewerProtocolPolicy: redirect-to-https
+          ForwardedValues:
+            QueryString: true
+        Origins:
+          - Id: "static-web"
+            DomainName: ${self:custom.siteBucketName}
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+
+        ViewerCertificate:
+          # TODO: Paremeterise this
+          AcmCertificateArn: "arn:aws:acm:us-east-1:145787944847:certificate/324c6bce-4ff3-4f17-9ed7-6764f6df7b04"
+        Enabled: true
+
+  CloudFrontDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: memstack.io
+      Name: dev.memstack.io
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFrontDistribution.DomainName
+        HostedZoneId: "Z2FDTNDATAQYW2" # Global HostedZone for CloudFront distrobutions
