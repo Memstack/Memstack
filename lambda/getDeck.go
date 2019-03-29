@@ -16,8 +16,8 @@ type APIError struct {
 	Message string `json:"message"`
 }
 
-// GetCardHandler is our lambda handler invoked by the `lambda.Start` function call
-func GetCardHandler(request Request) (Response, error) {
+// GetDeckHandler is our lambda handler invoked by the `lambda.Start` function call
+func GetDeckHandler(request Request) (Response, error) {
 	deckID := request.PathParameters["deckId"]
 
 	card, err := getCardsInDeck(deckID)
@@ -48,5 +48,5 @@ func GetCardHandler(request Request) (Response, error) {
 }
 
 func main() {
-	lambda.Start(GetCardHandler)
+	lambda.Start(GetDeckHandler)
 }
