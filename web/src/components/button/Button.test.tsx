@@ -1,7 +1,7 @@
-import React from "react";
-import Button from "./Button";
 import { shallow } from "enzyme";
+import React from "react";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 describe("Button", () => {
   it("renders without crashing", () => {

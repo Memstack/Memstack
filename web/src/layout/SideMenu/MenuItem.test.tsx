@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import React from "react";
-import MenuItem from "./MenuItem";
 import { Link } from 'react-router-dom';
+import MenuItem from "./MenuItem";
 
 describe("MenuItem", () => {
   it("renders without crashing", () => {

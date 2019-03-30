@@ -12,7 +12,7 @@ interface ButtonProps {
   palette?: IPalette;
 }
 
-const Button: React.SFC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   text,
   href,
   secondary,

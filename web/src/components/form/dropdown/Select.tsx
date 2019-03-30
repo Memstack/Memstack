@@ -1,13 +1,13 @@
-import React from "react";
-import { Form, Dropdown, Label, DropdownItemProps } from "semantic-ui-react";
 import { FieldProps, FormikActions } from "formik";
 import _ from "lodash";
+import React from "react";
+import { Dropdown, DropdownItemProps, Form, Label } from "semantic-ui-react";
 
 export type DropdownValue =
   | string
   | number
   | boolean
-  | (string | number | boolean)[]
+  | Array<string | number | boolean>
   | undefined;
 
 interface DropdownInputOptionProps {

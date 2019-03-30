@@ -1,5 +1,5 @@
-import React from "react";
 import { FieldProps, FormikActions } from "formik";
+import React from "react";
 import { Form, Label, TextArea } from "semantic-ui-react";
 
 interface ExtraProps {
