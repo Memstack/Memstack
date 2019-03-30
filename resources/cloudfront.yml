@@ -46,11 +46,7 @@ Resources:
             CustomOriginConfig:
               OriginProtocolPolicy: http-only
           - Id: "api-gateway"
-            DomainName:
-              Fn::Join:
-                - ""
-                - - Ref: ApiGatewayRestApi
-                  - ".execute-api.${self:provider.region}.amazonaws.com"
+            DomainName: !Ref ApiGatewayDomainName
             CustomOriginConfig:
               OriginProtocolPolicy: https-only
               OriginSSLProtocols:

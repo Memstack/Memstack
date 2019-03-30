@@ -18,10 +18,10 @@ clean-web:
 
 deploy-web: clean-web build-web
 	echo "Deploying client..."
-	sls client deploy
+	sls client deploy --no-confirm
 
 deploy-stack: clean build
 	echo "Deploying stack..."
-	sls deploy --verbose 
+	sls deploy --verbose
 
 deploy: deploy-stack deploy-web
