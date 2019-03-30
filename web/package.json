@@ -35,6 +35,9 @@
     "enzyme-to-json": "^3.3.4",
     "fork-ts-checker-webpack-plugin": "^0.4.15",
     "react-test-renderer": "^16.6.1",
+    "tslint": "^5.14.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.1.6"
   },
   "jest": {
