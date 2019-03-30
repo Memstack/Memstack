@@ -1,6 +1,6 @@
 import React from "react";
-import MenuItem from "./MenuItem";
 import "./SideMenu.scss";
+import MenuItem from "./MenuItem";
 
 const SideMenu: React.FC<{}> = () => (
   <div className="side-menu hide-mobile">

@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
-import { MemoryRouter } from "react-router";
 import TopMenu from "./TopMenu";
+import { MemoryRouter } from "react-router";
 
 describe("TopMenu", () => {
   it("renders without crashing", () => {

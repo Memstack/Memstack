@@ -1,10 +1,10 @@
 import { Field, Formik } from "formik";
 import React from "react";
-import { Divider, Dropdown } from "semantic-ui-react";
-import Button from "../../button/Button";
 import Select, { DropdownValue } from "../../form/dropdown/Select";
 import TextAreaInput from "../../form/textarea/TextAreaInput";
 import "./AddCardForm.scss";
+import { Dropdown, Divider } from "semantic-ui-react";
+import Button from "../../button/Button";
 
 const existingDecks = [
   { text: "Spanish", value: "spanish" },
@@ -14,7 +14,7 @@ const existingDecks = [
   { text: "UX", value: "ux" }
 ];
 
-const existingTags = [
+let existingTags = [
   { text: "Verb", value: "verb" },
   { text: "Adjective", value: "adjective" },
   { text: "Noun", value: "noun" }
@@ -39,7 +39,7 @@ const AddCardForm = () => (
     <Formik
       initialValues={{ deck: "", front: "", back: "", tags: [] }}
       validate={(values: AddCardFormValues) => {
-        const errors: any = {};
+        let errors: any = {};
         if (!values.deck) {
           errors.deck = "Required";
         }

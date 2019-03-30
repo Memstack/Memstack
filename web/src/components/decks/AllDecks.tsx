@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Button from "../button/Button";
-import "./AllDecks.scss";
+import Deck from "./Deck/Deck";
+import SpanishCover from "./assets/spanish-card-image.png";
 import ItalianCover from "./assets/italian-card-background.jpg";
 import MachineLearningCover from "./assets/machine-learning-card-background.jpg";
 import PhysicsCover from "./assets/physics-card-background.jpg";
-import SpanishCover from "./assets/spanish-card-image.png";
 import UXCover from "./assets/ux-card-background.png";
-import Deck from "./Deck/Deck";
+import "./AllDecks.scss";
+import Button from "../button/Button";
+import { Link } from "react-router-dom";
 
 const decks = [
   {

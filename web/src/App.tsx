@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AddCard from './components/addCard/AddCard';
-import AllDecks from "./components/decks/AllDecks";
 import Layout from "./layout";
+import AllDecks from "./components/decks/AllDecks";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AddCard from './components/addCard/AddCard';
 
 class App extends React.Component {
   public render() {
