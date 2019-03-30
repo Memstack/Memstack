@@ -6,7 +6,7 @@ interface MenuItemProps {
   to?: string;
 }
 
-const MenuItem: React.SFC<MenuItemProps> = ({ icon, to }) => (
+const MenuItem: React.FC<MenuItemProps> = ({ icon, to }) => (
   <Link to={to || '#'}>
     <div className="item">
       <i className={icon} />

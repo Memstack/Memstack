@@ -61,7 +61,7 @@ export const customSearch = (
   return sorted;
 };
 
-const DropdownInput: React.SFC<DropdownInputProps> = ({
+const DropdownInput: React.FC<DropdownInputProps> = ({
   field,
   form,
   options,

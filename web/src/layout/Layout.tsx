@@ -9,7 +9,7 @@ interface ILayoutProps {
   children?: React.ReactNode;
 }
 
-const Layout: React.SFC<ILayoutProps> = ({ children }) => (
+const Layout: React.FC<ILayoutProps> = ({ children }) => (
   <>
     <Helmet
       title="Memstack"
