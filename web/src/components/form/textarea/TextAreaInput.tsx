@@ -15,7 +15,7 @@ interface ExtraProps {
 
 interface TextAreaInputProps extends FieldProps, ExtraProps {}
 
-const TextAreaInput: React.FC<TextAreaInputProps> = ({
+const TextAreaInput: React.SFC<TextAreaInputProps> = ({
   field,
   form,
   extra: { label, placeholder, onKeyDown } = {
