@@ -54,3 +54,7 @@ custom:
     manageResources: false
     bucketName: dev.memstack.io
     distributionFolder: web/build/
+    objectHeaders:
+      "index.html":
+        - name: "Cache-Control"
+          value: "no-cache"
