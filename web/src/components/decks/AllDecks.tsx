@@ -45,13 +45,14 @@ const decks = [
 const AllDecks = () => (
   <div className="AllDecks">
     <Link to="/create-deck" className="new-deck">
-        <div className="text">
-          Add Deck
-          <i className="fas fa-plus" />
-        </div>
+      <div className="text">
+        Add Deck
+        <i className="fas fa-plus" />
+      </div>
     </Link>
     {decks.map((deck, idx) => (
       <Deck
+        id={(idx + 1).toString()}
         name={deck.name}
         img={deck.img}
         meta={deck.meta}

@@ -36,11 +36,15 @@ const DeckById: React.FC<DeckByIdProps> = ({ match }) => {
     <div>
       <h1>Deck {match && match.params.id}</h1>
       <ul>
-        {cards.map(c => (
-          <li key={c.CardDeckInfo}>
-            <b>{c.Front}</b>: {c.Back}
-          </li>
-        ))}
+        {cards.length ? (
+          cards.map(c => (
+            <li key={c.CardDeckInfo}>
+              <b>{c.Front}</b>: {c.Back}
+            </li>
+          ))
+        ) : (
+          <p>No cards in this deck</p>
+        )}
       </ul>
     </div>
   );

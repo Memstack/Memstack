@@ -5,13 +5,14 @@ import Button from "../../button/Button";
 import "./Deck.scss";
 
 interface DeckProps {
+  id: string;
   img?: string;
   name: string;
   meta: string;
   description: string;
 }
 
-const Deck: React.SFC<DeckProps> = ({ img, name, meta, description }) => {
+const Deck: React.SFC<DeckProps> = ({ img, name, meta, description, id }) => {
   return (
     <Palette image={img}>
       {(palette: IPalette) => (
@@ -24,7 +25,7 @@ const Deck: React.SFC<DeckProps> = ({ img, name, meta, description }) => {
           <div className="description">{description}</div>
           <div className="controls">
             <Button text="Edit" secondary />
-            <Button text="Review" />
+            <Button text="Review" href={`/decks/${id}`} />
           </div>
         </div>
       )}
