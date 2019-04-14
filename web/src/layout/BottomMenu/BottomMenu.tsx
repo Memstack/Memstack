@@ -14,7 +14,7 @@ const menuItems = [
   },
   {
     to: "/",
-    name: "Decks",
+    name: "Library",
     icon: "fas fa-book-open"
   }
 ];

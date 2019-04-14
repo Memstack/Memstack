@@ -20,15 +20,6 @@
     display: none;
   }
 
-
-  a {
-    align-self: center;
-  }
-
-  .separator {
-    // border-left: 1px solid #2f3031;
-  }
-
   .item {
     display: flex;
     flex-direction: column;
@@ -37,14 +28,15 @@
     font-size: 20px;
     font-weight: 500;
 
+    margin-top: 0.8rem;
+
     svg {
       margin: 0 auto;
     }
 
     .text {
       text-align: center;
-      font-size: 10px;
-      margin-top: 2px;
+      font-size: 11px;
     }
   }
 }
