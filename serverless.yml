@@ -4,10 +4,13 @@ frameworkVersion: ">=1.28.0 <2.0.0"
 
 plugins:
   - serverless-finch
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
 
 provider:
   name: aws
-  runtime: go1.x
+  runtime: nodejs8.10
   profile: memstack
   environment:
     TABLE_NAME: Memstack
@@ -35,12 +38,12 @@ package:
     - ./bin/**
 
 functions:
-  getCardsInDeck:
-    handler: bin/getDeck
+  getDeck:
+    handler: lambda/getDeck.handler
     events:
       - http:
-          path: decks/{deckId}
           method: get
+          path: decks/{deckId}
 
 resources:
   - ${file(resources/api-gateway.yml)}
