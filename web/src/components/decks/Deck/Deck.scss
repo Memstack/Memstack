@@ -8,7 +8,7 @@
   height: $deck-height;
 
   background-color: white;
-  border-radius: 0.28571429rem;
+  border-radius: $card-border-radius;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
 
   display: flex;
@@ -18,7 +18,7 @@
 
   .cover-image {
     height: 180px;
-    border-radius: 0.28571429rem 0.28571429rem 0 0 !important;
+    border-radius: $card-border-radius $card-border-radius 0 0 !important;
 
     border-bottom: 1px solid #d4d4d5;
 
@@ -31,7 +31,7 @@
       min-height: 180px;
       margin-left: auto;
       margin-right: auto;
-      border-radius: 0.28571429rem 0.28571429rem 0 0 !important;
+      border-radius: $card-border-radius $card-border-radius 0 0 !important;
     }
   }
 
