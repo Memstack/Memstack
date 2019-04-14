@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "serverless offline",
+    "db:install": "dynamodb install",
     "db:start": "serverless dynamodb start --migrate"
   },
   "repository": {
