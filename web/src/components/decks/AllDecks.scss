@@ -37,13 +37,14 @@
   .new-deck {
     min-width: 300px;
     width: $deck-width;
-    height: $deck-height;
+    height: ($deck-height / 5);
     margin: 4rem auto 0 auto;
     min-width: 300px;
     background-color: #f2fdff;
 
     @include media-query(small) {
       margin-top: 2rem;
+      height: $deck-height;
     }
 
     border-radius: $card-border-radius;
@@ -55,18 +56,27 @@
 
     .text {
       display: flex;
-      flex-direction: column;
-
-      margin-top: 8.5rem;
+      flex-direction: row;
+      margin: auto auto;
 
       font-size: 26px;
       font-weight: 300;
       color: #3273dc;
 
+      @include media-query(small) {
+        flex-direction: column;
+        font-size: 26px;
+      }
+
       svg {
-        font-size: 40px;
-        font-weight: 200;
-        margin: 0.7rem auto 0 auto;
+        margin-left: 0.8rem;
+        margin-top: -0.2rem;
+
+        @include media-query(small) {
+          font-size: 40px;
+          font-weight: 200;
+          margin: 0.7rem auto 0 auto;
+        }
       }
     }
   }
