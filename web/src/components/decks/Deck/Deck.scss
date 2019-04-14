@@ -35,20 +35,23 @@
     }
   }
 
-  .deck-name {
-    padding-top: 5px;
-    font-size: 13pt;
-    font-weight: 500;
-    width: 100%;
-  }
+  .info {
+    padding-top: 10px;
+    .deck-name {
+      // padding-top: 5px;
+      font-size: 13pt;
+      font-weight: 500;
+      width: 100%;
+    }
 
-  .meta {
-    font-size: 1em;
-    color: rgba(0, 0, 0, 0.4);
-  }
+    .meta {
+      font-size: 1em;
+      color: rgba(0, 0, 0, 0.4);
+    }
 
-  .description {
-    padding: 0.5rem;
+    .description {
+      padding: 0.5rem;
+    }
   }
 
   .controls {

@@ -20,12 +20,10 @@ const Deck: React.SFC<DeckProps> = ({ img, name, meta, description, id }) => {
           <div className="cover-image">
             <img src={img} />
           </div>
-          <div className="deck-name">{name}</div>
-          <div className="meta">{meta}</div>
-          <div className="description">{description}</div>
-          <div className="controls">
-            <Button text="Edit" secondary />
-            <Button text="Review" href={`/decks/${id}`} />
+          <div className="info">
+            <div className="deck-name">{name}</div>
+            <div className="meta">{meta}</div>
+            <div className="description">{description}</div>
           </div>
         </div>
       )}
