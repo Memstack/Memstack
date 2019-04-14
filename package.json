@@ -1,10 +1,11 @@
 {
-  "name": "Memstack",
+  "name": "memstack",
   "version": "1.0.0",
   "description": "A flash card app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serverless offline"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,14 @@
   },
   "homepage": "https://github.com/Memstack/Memstack#readme",
   "devDependencies": {
-    "serverless-domain-manager": "^3.2.1"
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.12.18",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "serverless-domain-manager": "^3.2.1",
+    "serverless-offline": "^4.9.4",
+    "serverless-webpack": "^5.2.0"
   },
   "dependencies": {
     "serverless-finch": "^2.4.2"
