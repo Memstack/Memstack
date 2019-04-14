@@ -8,7 +8,6 @@ interface ITopMenuState {
 }
 
 const menuItems = [
-  // { to: "/all-decks", text: "All Decks", icon: "fas fa-server", extraClass: "mobile-only" },
   { to: "/account", text: "Account", icon: "fas fa-user", extraClass: "" },
   { to: "/settings", text: "Settings", icon: "fas fa-cog", extraClass: "" }
 ];

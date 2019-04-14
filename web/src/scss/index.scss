@@ -8,10 +8,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-
-  // @media screen and (device-aspect-ratio: 40/71) {
-  //   height: 130vh;
-  // }
 }
 
 body {
@@ -22,22 +18,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .hide-mobile {
   display: none !important;
   @include media-query(small) {
     display: inline-block !important;
-  }
-}
-
-.mobile-only {
-  display: inline-block !important;
-  @include media-query(small) {
-    display: none !important;
   }
 }
 
