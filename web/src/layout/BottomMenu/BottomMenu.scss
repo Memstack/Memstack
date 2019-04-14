@@ -9,17 +9,17 @@
 
   height: $bottom-nav-height;
   width: 100%;
+  padding: 0 1rem;
 
   background-color: $navbar-color;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   @include media-query(small) {
     display: none;
   }
 
-  padding: 0 1rem;
 
   a {
     align-self: center;

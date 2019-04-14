@@ -8,24 +8,14 @@ const menuItems = [
     icon: "fas fa-chart-bar"
   },
   {
-    to: "/",
-    name: "Decks",
-    icon: "fas fa-book-open"
-  },
-  {
     to: "/add-card",
     name: "Add Card",
     icon: "fas fa-plus"
   },
   {
-    to: "/account",
-    name: "Account",
-    icon: "fas fa-user"
-  },
-  {
-    to: "/settings",
-    name: "Settings",
-    icon: "fas fa-cog"
+    to: "/",
+    name: "Decks",
+    icon: "fas fa-book-open"
   }
 ];
 
