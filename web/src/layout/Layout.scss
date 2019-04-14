@@ -11,4 +11,11 @@
   padding-top: 0;
   padding-right: 0;
 
+
+  padding-bottom: $bottom-nav-height;
+
+  @include media-query(small) {
+    padding-bottom: 0;
+  }
+
 }
