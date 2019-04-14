@@ -10,12 +10,20 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
     serializers: { err: stdSerializers.err }
   });
 
-  const documentClient = new DynamoDB.DocumentClient({
-    region: "localhost",
-    endpoint: "http://localhost:8000",
-    accessKeyId: "DEFAULT_ACCESS_KEY",
-    secretAccessKey: "DEFAULT_SECRET"
-  });
+  log.info({ env: process.env.NODE_ENV });
+
+  let documentClient: DynamoDB.DocumentClient;
+
+  if (process.env.NODE_ENV === "development") {
+    documentClient = new DynamoDB.DocumentClient({
+      region: "localhost",
+      endpoint: "http://localhost:8000",
+      accessKeyId: "DEFAULT_ACCESS_KEY",
+      secretAccessKey: "DEFAULT_SECRET"
+    });
+  } else {
+    documentClient = new DynamoDB.DocumentClient();
+  }
 
   const tableName = process.env.TABLE_NAME;
 
