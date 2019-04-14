@@ -42,15 +42,10 @@
 
   .main {
     width: 100%;
+    height: $navbar-height;
 
-    height: $navbar-mobile-height;
-    @include media-query(small) {
-      height: $navbar-height;
-    }
     display: flex;
-
     justify-content: center;
-
     @include media-query(small) {
       justify-content: space-between;
     }
