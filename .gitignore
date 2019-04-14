@@ -5,3 +5,5 @@ node_modules/
 
 # Webpack directories
 .webpack
+
+.dynamodb

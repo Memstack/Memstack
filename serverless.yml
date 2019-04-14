@@ -3,9 +3,10 @@ service: memstack
 frameworkVersion: ">=1.28.0 <2.0.0"
 
 plugins:
-  - serverless-offline
-  - serverless-webpack
   - serverless-finch
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
 
 provider:
   name: aws
@@ -37,12 +38,12 @@ package:
     - ./bin/**
 
 functions:
-  hello:
-    handler: lambda/handler.hello
+  getDeck:
+    handler: lambda/getDeck.handler
     events:
       - http:
           method: get
-          path: hello
+          path: decks/{deckId}
 
 resources:
   - ${file(resources/api-gateway.yml)}
