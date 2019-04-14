@@ -6,7 +6,6 @@ import MachineLearningCover from "./assets/machine-learning-card-background.jpg"
 import PhysicsCover from "./assets/physics-card-background.jpg";
 import UXCover from "./assets/ux-card-background.png";
 import "./AllDecks.scss";
-import Button from "../button/Button";
 import { Link } from "react-router-dom";
 
 const decks = [
