@@ -1,0 +1,19 @@
+[
+  {
+    "DeckId": "1",
+    "CardDeckInfo": "Deck",
+    "Title": "My first deck"
+  },
+  {
+    "DeckId": "1",
+    "CardDeckInfo": "Card_1",
+    "Front": "Hello",
+    "Back": "World"
+  },
+  {
+    "DeckId": "1",
+    "CardDeckInfo": "Card_2",
+    "Front": "Front",
+    "Back": "Back"
+  }
+]

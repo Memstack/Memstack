@@ -61,3 +61,14 @@ custom:
       "index.html":
         - name: "Cache-Control"
           value: "no-cache"
+
+  dynamodb:
+    start:
+      migrate: true
+      seed: true
+
+    seed:
+      dev:
+        sources:
+          - table: Memstack
+            sources: [./seed-data.json]
