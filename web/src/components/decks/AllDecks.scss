@@ -35,16 +35,14 @@
 
   .new-deck {
     min-width: 300px;
-    width: 90%;
+    width: $deck-width;
+    height: $deck-height;
     margin: 4rem auto 0 auto;
     min-width: 300px;
-    height: 350px;
     background-color: #f2fdff;
 
     @include media-query(small) {
       margin-top: 2rem;
-      // max-width: 300px;
-      width: 90%;
     }
 
     border-radius: 0.28571429rem;
