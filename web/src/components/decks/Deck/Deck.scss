@@ -1,5 +1,9 @@
 @import "../../../scss/index.scss";
 
+a > .Deck {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
 .Deck {
   margin-left: auto;
   margin-right: auto;
@@ -17,9 +21,9 @@
   text-align: center;
 
   .cover-image {
-    height: 180px;
-    border-radius: $card-border-radius $card-border-radius 0 0 !important;
+    height: ($deck-height / 2);
 
+    border-radius: $card-border-radius $card-border-radius 0 0 !important;
     border-bottom: 1px solid #d4d4d5;
 
     overflow: hidden;
@@ -28,15 +32,14 @@
       display: block;
       width: 100%;
       height: auto;
-      min-height: 180px;
-      margin-left: auto;
-      margin-right: auto;
+      min-height: ($deck-height / 2);
+      margin: 0 auto;
       border-radius: $card-border-radius $card-border-radius 0 0 !important;
     }
   }
 
   .info {
-    padding-top: 10px;
+    padding-top: 2rem;
     .deck-name {
       // padding-top: 5px;
       font-size: 13pt;
@@ -70,11 +73,6 @@
       height: 3.7rem;
       justify-content: space-between;
       flex-direction: row;
-    }
-
-    a {
-      width: 100%;
-      align-self: center;
     }
 
     :first-child {
