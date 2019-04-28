@@ -8,7 +8,6 @@ describe("POST /cards", () => {
     await agent("http://localhost:3000")
       .post("/cards")
       .send({ front: "Front", back: "Back" })
-      .expect(200)
-      .expect({ front: "Front", back: "Back", id: "foobar" });
+      .expect(200);
   });
 });
