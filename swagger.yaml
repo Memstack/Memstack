@@ -14,13 +14,15 @@ servers:
 paths:
   /cards:
     post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/card"
+
       responses:
         200:
           description: Created Card
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/card"
 
 components:
   schemas:
