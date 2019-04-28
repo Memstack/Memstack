@@ -1,0 +1,24 @@
+@import "../../scss/media";
+@import "../../scss/variables";
+
+.schedule {
+
+  width: 90%;
+  margin: 0 auto;
+
+  @include media-query(small) {
+    width: 100%;
+  }
+
+  .reviews {
+    display: flex;
+    flex-direction: row;
+
+    overflow-y: hidden;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+      height: 0;
+    }
+  }
+}
