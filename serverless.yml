@@ -50,6 +50,17 @@ functions:
       - http:
           method: post
           path: cards
+  addCardToStack:
+    handler: lambda/addCardToStack.handler
+    events:
+      - http:
+          method: post
+          path: stacks/{stackid}/cards/{cardid}
+          request:
+            parameters:
+              path:
+                stackid: true
+                cardid: true
 resources:
   - ${file(resources/api-gateway.yml)}
   - ${file(resources/dynamodb-table.yml)}
