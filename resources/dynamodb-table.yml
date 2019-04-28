@@ -5,12 +5,12 @@ Resources:
       TableName: Memstack
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
-        - AttributeName: DeckId
+        - AttributeName: StackId
           AttributeType: S
-        - AttributeName: CardDeckInfo
+        - AttributeName: CardStackInfo
           AttributeType: S
       KeySchema:
-        - AttributeName: DeckId
+        - AttributeName: StackId
           KeyType: HASH
-        - AttributeName: CardDeckInfo
+        - AttributeName: CardStackInfo
           KeyType: RANGE

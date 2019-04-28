@@ -6,45 +6,45 @@ info:
   version: 0.1.0
 
 paths:
-  /decks:
+  /stacks:
     post:
-      description: Create a new deck
+      description: Create a new stack
       responses:
         200:
-          description: Succesfully created a new deck 
+          description: Succesfully created a new stack 
     get:
-      description: Get all decks for the current user
+      description: Get all stacks for the current user
       responses:
         200:
-          description: Succesfully got decks for user
-  /decks/{deckId}:
+          description: Succesfully got stacks for user
+  /stacks/{stackId}:
     get:
-      description: Get a deck by ID
+      description: Get a stack by ID
       parameters:
-        - name: deckId
+        - name: stackId
           in: path
           schema:
             type: string
           required: true
       responses:
         200:
-          description: Succesfully got deck by ID
+          description: Succesfully got stack by ID
           
-  /decks/{deckId}/cards:
+  /stacks/{stackId}/cards:
     parameters:
-      - name: deckId
+      - name: stackId
         in: path
         required: true
         schema:
           type: string
     get:
-      description: Get the cards associated with a deck
+      description: Get the cards associated with a stack
       responses:
         200:
-          description: Succesfully got cards in deck
+          description: Succesfully got cards in stack
     post:
-      description: Add a card to deck
+      description: Add a card to stack
       responses:
         200:
-          description: Added a card to the deck
+          description: Added a card to the stack
     

@@ -1,9 +1,9 @@
 import React from "react";
 import Layout from "./layout";
-import AllDecks from "./components/decks/AllDecks";
+import AllStacks from "./components/stacks/AllStacks";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AddCard from "./components/addCard/AddCard";
-import DeckById from "./components/deckById/DeckById";
+import StackById from "./components/stackById/StackById";
 
 class App extends React.Component {
   public render() {
@@ -11,9 +11,9 @@ class App extends React.Component {
       <BrowserRouter>
         <Layout>
           <Switch>
-            <Route path="/" exact component={AllDecks} />
+            <Route path="/" exact component={AllStacks} />
             <Route path="/add-card" component={AddCard} />
-            <Route path="/decks/:id" component={DeckById} />
+            <Route path="/stacks/:id" component={StackById} />
           </Switch>
         </Layout>
       </BrowserRouter>

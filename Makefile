@@ -1,5 +1,5 @@
 
-go_apps = bin/getDeck
+go_apps = bin/getStack
 
 bin/% : lambda/%.go lambda/dao.go
 	export GO111MODULE=on

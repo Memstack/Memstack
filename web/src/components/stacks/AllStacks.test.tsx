@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import AllDecks from "./AllDecks";
+import AllStacks from "./AllStacks";
 
-describe("AllDecks", () => {
+describe("AllStacks", () => {
   it("renders without crashing", () => {
-    shallow(<AllDecks />);
+    shallow(<AllStacks />);
   });
 });
