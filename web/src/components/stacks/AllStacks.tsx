@@ -7,6 +7,7 @@ import PhysicsCover from "./assets/physics-card-background.jpg";
 import UXCover from "./assets/ux-card-background.png";
 import "./AllStacks.scss";
 import { Link } from "react-router-dom";
+import Schedule from "../schedule/Schedule";
 
 const stacks = [
   {
@@ -43,22 +44,25 @@ const stacks = [
 
 const AllStacks = () => (
   <div className="AllStacks centered">
-    <Link to="/create-stack" className="new-stack">
-      <div className="text">
-        Add Stack
-        <i className="fas fa-plus" />
-      </div>
-    </Link>
-    {stacks.map((stack, idx) => (
-      <Stack
-        id={(idx + 1).toString()}
-        name={stack.name}
-        img={stack.img}
-        meta={stack.meta}
-        description={stack.description}
-        key={idx}
-      />
-    ))}
+    <Schedule />
+    <div className="stacks">
+      <Link to="/create-stack" className="new-stack">
+        <div className="text">
+          Add Stack
+          <i className="fas fa-plus" />
+        </div>
+      </Link>
+      {stacks.map((stack, idx) => (
+        <Stack
+          id={(idx + 1).toString()}
+          name={stack.name}
+          img={stack.img}
+          meta={stack.meta}
+          description={stack.description}
+          key={idx}
+        />
+      ))}
+    </div>
   </div>
 );
 

@@ -5,70 +5,77 @@
   display: flex;
   flex-direction: column;
 
-  @include media-query(small) {
-    margin-top: 0;
-  }
+  margin-top: 2rem;
 
-  @media only screen and (min-width: $two-col-start) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 2em;
-  }
-
-  @media only screen and (min-width: $three-col-start) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include media-query(xlarge) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .Stack {
-    margin-top: 2rem;
-  }
-
-  .new-stack {
-    min-width: 300px;
-    width: $stack-width;
-    height: ($stack-height / 5);
-    margin: 4rem auto 0 auto;
-    min-width: 300px;
-    background-color: #f2fdff;
-
-    @include media-query(small) {
-      margin-top: 2rem;
-      height: $stack-height;
-    }
-
-    border-radius: $card-border-radius;
-    border: 1px dashed #d4d4d5;
-
+  .stacks {
     display: flex;
     flex-direction: column;
-    text-align: center;
 
-    .text {
-      display: flex;
-      flex-direction: row;
-      margin: auto auto;
+    @include media-query(small) {
+      margin-top: 1rem;
+    }
 
-      font-size: 26px;
-      font-weight: 300;
-      color: #3273dc;
+    @media only screen and (min-width: $two-col-start) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 2em;
+    }
+
+    @media only screen and (min-width: $three-col-start) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-query(xlarge) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .Stack {
+      margin-top: 2rem;
+    }
+
+    .new-stack {
+      min-width: 300px;
+      width: $stack-width;
+      height: ($stack-height / 5);
+      margin: 2rem auto 0 auto;
+      min-width: 300px;
+      background-color: #f2fdff;
 
       @include media-query(small) {
-        flex-direction: column;
-        font-size: 26px;
+        margin-top: 2rem;
+        height: $stack-height;
       }
 
-      svg {
-        margin-left: 0.8rem;
-        margin-top: -0.2rem;
+      border-radius: $card-border-radius;
+      border: 1px dashed #d4d4d5;
+
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      .text {
+        display: flex;
+        flex-direction: row;
+        margin: auto auto;
+
+        font-size: 26px;
+        font-weight: 300;
+        color: #3273dc;
 
         @include media-query(small) {
-          font-size: 40px;
-          font-weight: 200;
-          margin: 0.7rem auto 0 auto;
+          flex-direction: column;
+          font-size: 26px;
+        }
+
+        svg {
+          margin-left: 0.8rem;
+          margin-top: -0.2rem;
+
+          @include media-query(small) {
+            font-size: 40px;
+            font-weight: 200;
+            margin: 0.7rem auto 0 auto;
+          }
         }
       }
     }
