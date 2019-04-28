@@ -4,8 +4,9 @@
   "description": "A flash card app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "serverless offline",
+    "lint": "eslint ./lambda/**/*.ts",
     "db:install": "serverless dynamodb install",
     "db:start": "serverless dynamodb start"
   },
@@ -23,20 +24,45 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
     "@types/bunyan": "^1.8.6",
+    "@types/jest": "^24.0.11",
     "@types/node": "^10.12.18",
+    "@types/supertest": "^2.0.7",
+    "@types/uuid": "^3.4.4",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "serverless-domain-manager": "^3.2.1",
     "serverless-dynamodb-local": "^0.2.37",
+    "serverless-finch": "^2.4.2",
     "serverless-offline": "^4.9.4",
     "serverless-webpack": "^5.2.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.4",
     "webpack": "4.28.3"
   },
   "dependencies": {
-    "@types/uuid": "^3.4.4",
     "aws-sdk": "^2.437.0",
-    "body-parser": "^1.19.0",
-    "bunyan": "^1.8.12",
-    "serverless-finch": "^2.4.2"
+    "bunyan": "^1.8.12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{ts,tsx}": [
+        "eslint --fix",
+        "prettier --write",
+        "git add"
+      ]
+    }
   }
 }
