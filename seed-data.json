@@ -1,19 +1,20 @@
 [
   {
-    "StackId": "1",
-    "CardStackInfo": "Stack",
-    "Title": "My first stack"
+    "pkey": "Card-1",
+    "skey": "UserId:DummyUser#StackId:Stack-All",
+    "front": "Card-1 front",
+    "back": "Card-1 back"
   },
   {
-    "StackId": "1",
-    "CardStackInfo": "Card_1",
-    "Front": "Hello",
-    "Back": "World"
+    "pkey": "Card-2",
+    "skey": "UserId:DummyUser#StackId:Stack-All",
+    "front": "Card-2 front",
+    "back": "Card-2 back"
   },
   {
-    "StackId": "1",
-    "CardStackInfo": "Card_2",
-    "Front": "Front",
-    "Back": "Back"
+    "pkey": "Card-3",
+    "skey": "UserId:DummyUser#StackId:Stack-All",
+    "front": "Card-3 front",
+    "back": "Card-3 back"
   }
 ]

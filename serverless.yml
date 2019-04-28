@@ -39,7 +39,7 @@ package:
 
 functions:
   getStack:
-    handler: lambda/getStack.handler
+    handler: lambda/getDeck.handler
     events:
       - http:
           method: get
@@ -47,9 +47,20 @@ functions:
   createCard:
     handler: lambda/createCard.handler
     events:
-      - http: 
+      - http:
           method: post
           path: cards
+  addCardToStack:
+    handler: lambda/addCardToStack.handler
+    events:
+      - http:
+          method: post
+          path: stacks/{stackid}/cards/{cardid}
+          request:
+            parameters:
+              path:
+                stackid: true
+                cardid: true
 resources:
   - ${file(resources/api-gateway.yml)}
   - ${file(resources/dynamodb-table.yml)}
