@@ -8,3 +8,17 @@ paths:
       responses:
         200:
           description: Created Card
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/card"
+
+components:
+  schemas:
+    card:
+      type: object
+      properties:
+        front:
+          type: string
+        back:
+          type: string
