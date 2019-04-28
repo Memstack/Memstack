@@ -13,21 +13,21 @@ describe("TopMenu", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // it("sets active to true when burger is clicked", () => {
-  //   const component = mount(
-  //     <MemoryRouter>
-  //       <TopMenu />
-  //     </MemoryRouter>
-  //   );
-  //   const burger = component.find(".burger");
+  it.skip("sets active to true when burger is clicked", () => {
+    const component = mount(
+      <MemoryRouter>
+        <TopMenu />
+      </MemoryRouter>
+    );
+    const burger = component.find(".burger");
 
-  //   const stateBeforeClick = (component.find(TopMenu).instance() as TopMenu)
-  //     .state.isActive;
-  //   burger.simulate("click");
-  //   const stateAfterClick = (component.find(TopMenu).instance() as TopMenu)
-  //     .state.isActive;
+    const stateBeforeClick = (component.find(TopMenu).instance() as TopMenu)
+      .state.isActive;
+    burger.simulate("click");
+    const stateAfterClick = (component.find(TopMenu).instance() as TopMenu)
+      .state.isActive;
 
-  //   expect(stateBeforeClick).toBe(false);
-  //   expect(stateAfterClick).toBe(true);
-  // });
+    expect(stateBeforeClick).toBe(false);
+    expect(stateAfterClick).toBe(true);
+  });
 });
