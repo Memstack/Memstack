@@ -50,7 +50,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const params = {
     TableName: tableName,
     Item: {
-      pkey: `card-${id}`,
+      pkey: `Card-${id}`,
       skey: "UserId:DummyUser#StackId:Stack-All",
       front: card.front,
       back: card.back
