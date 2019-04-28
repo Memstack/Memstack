@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RouteChildrenProps } from "react-router";
 import axios from "axios";
+import "./DeckById.scss";
 
 type DeckByIdProps = RouteChildrenProps<{ id: string }>;
 
@@ -33,7 +34,7 @@ const DeckById: React.FC<DeckByIdProps> = ({ match }) => {
   }, []);
 
   return (
-    <div>
+    <div className="DeckById centered">
       <h1>Deck {match && match.params.id}</h1>
       <ul>
         {cards.length ? (

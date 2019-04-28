@@ -42,7 +42,7 @@ const decks = [
 ];
 
 const AllDecks = () => (
-  <div className="AllDecks">
+  <div className="AllDecks centered">
     <Link to="/create-deck" className="new-deck">
       <div className="text">
         Add Deck
