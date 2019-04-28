@@ -1,0 +1,78 @@
+.review {
+  display: flex;
+  flex-direction: column;
+
+  width: 90px;
+  margin-left: 1rem;
+
+  &:first-child {
+    margin-left: 0rem;
+  }
+
+  .review-icon {
+    border-radius: 50%;
+    height: 60px;
+    min-width: 60px;
+    width: 60px;
+    text-align: center;
+    padding-top: 1.4rem;
+    color: #3273dc;
+    margin: 0 auto;
+    position: relative;
+    font-weight: 600;
+    border: 1px dashed #d4d4d5;
+  }
+
+  .review-icon::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(255, 109, 0, 0.9);
+    position: absolute;
+    left: calc(60px / 2 - 3px);
+    top: calc(60px / 2 - 2.5px);
+
+    $radius: 60px / 2 - 3px;
+
+    transform: rotate(-45deg) translateY(-$radius) rotate(-45deg);
+
+    -webkit-animation: circular 5s cubic-bezier(0.645, 0.045, 0.355, 1) infinite; /* Chrome, Safari 5 */
+    -moz-animation: circular 5s cubic-bezier(0.645, 0.045, 0.355, 1) infinite; /* Firefox 5-15 */
+    animation: circular 5s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite;
+
+    @-webkit-keyframes circular {
+      from {
+        -webkit-transform: rotate(0deg) translateY(-$radius) rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg) translateY(-$radius) rotate(-360deg);
+      }
+    }
+
+    @-moz-keyframes circular {
+      from {
+        -moz-transform: rotate(0deg) translateY(-$radius) rotate(0deg);
+      }
+      to {
+        -moz-transform: rotate(360deg) translateY(-$radius) rotate(-360deg);
+      }
+    }
+
+    @keyframes circular {
+      from {
+        transform: rotate(0deg) translateY(-$radius) rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg) translateY(-$radius) rotate(-360deg);
+      }
+    }
+  }
+
+  .review-text {
+    margin: 0.5rem auto 0 auto;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
