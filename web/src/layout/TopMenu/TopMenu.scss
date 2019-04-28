@@ -46,8 +46,9 @@
 
     display: flex;
     justify-content: center;
+
     @include media-query(small) {
-      justify-content: space-between;
+      justify-content: start;
     }
 
     img {
@@ -56,11 +57,15 @@
       align-self: center;
     }
 
-    .right {
+    .menu {
       display: none;
 
       @include media-query(small) {
         display: flex;
+      }
+
+      &.right {
+        margin-left: auto;
       }
     }
 

@@ -25,10 +25,7 @@ const Layout: React.SFC<ILayoutProps> = ({ children }) => (
       ]}
     />
     <TopMenu />
-    <div className="flex">
-      <SideMenu />
       <div id="content">{children}</div>
-    </div>
     <BottomMenu />
   </>
 );
