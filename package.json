@@ -34,6 +34,7 @@
     "husky": "^2.1.0",
     "jest": "^24.7.1",
     "lint-staged": "^8.1.5",
+    "prettier": "^1.17.0",
     "serverless-domain-manager": "^3.2.1",
     "serverless-dynamodb-local": "^0.2.37",
     "serverless-finch": "^2.4.2",
@@ -58,6 +59,7 @@
     "linters": {
       "*.{ts,tsx}": [
         "eslint --fix",
+        "prettier --write",
         "git add"
       ]
     }
