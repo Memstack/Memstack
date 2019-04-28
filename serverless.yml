@@ -44,7 +44,12 @@ functions:
       - http:
           method: get
           path: stacks/{stackId}
-
+  createCard:
+    handler: lambda/createCard.handler
+    events:
+      - http: 
+          method: post
+          path: cards
 resources:
   - ${file(resources/api-gateway.yml)}
   - ${file(resources/dynamodb-table.yml)}
