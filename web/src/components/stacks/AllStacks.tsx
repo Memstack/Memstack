@@ -1,14 +1,14 @@
 import React from "react";
-import Deck from "./Deck/Deck";
+import Stack from "./Stack/Stack";
 import SpanishCover from "./assets/spanish-card-image.png";
 import ItalianCover from "./assets/italian-card-background.jpg";
 import MachineLearningCover from "./assets/machine-learning-card-background.jpg";
 import PhysicsCover from "./assets/physics-card-background.jpg";
 import UXCover from "./assets/ux-card-background.png";
-import "./AllDecks.scss";
+import "./AllStacks.scss";
 import { Link } from "react-router-dom";
 
-const decks = [
+const stacks = [
   {
     name: "Spanish",
     img: SpanishCover,
@@ -41,25 +41,25 @@ const decks = [
   }
 ];
 
-const AllDecks = () => (
-  <div className="AllDecks">
-    <Link to="/create-deck" className="new-deck">
+const AllStacks = () => (
+  <div className="AllStacks centered">
+    <Link to="/create-stack" className="new-stack">
       <div className="text">
-        Add Deck
+        Add Stack
         <i className="fas fa-plus" />
       </div>
     </Link>
-    {decks.map((deck, idx) => (
-      <Deck
+    {stacks.map((stack, idx) => (
+      <Stack
         id={(idx + 1).toString()}
-        name={deck.name}
-        img={deck.img}
-        meta={deck.meta}
-        description={deck.description}
+        name={stack.name}
+        img={stack.img}
+        meta={stack.meta}
+        description={stack.description}
         key={idx}
       />
     ))}
   </div>
 );
 
-export default AllDecks;
+export default AllStacks;

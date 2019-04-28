@@ -13,7 +13,7 @@ describe("TopMenu", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it("sets active to true when burger is clicked", () => {
+  it.skip("sets active to true when burger is clicked", () => {
     const component = mount(
       <MemoryRouter>
         <TopMenu />

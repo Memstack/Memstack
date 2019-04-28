@@ -38,12 +38,12 @@ package:
     - ./bin/**
 
 functions:
-  getDeck:
-    handler: lambda/getDeck.handler
+  getStack:
+    handler: lambda/getStack.handler
     events:
       - http:
           method: get
-          path: decks/{deckId}
+          path: stacks/{stackId}
   createCard:
     handler: lambda/createCard.handler
     events:

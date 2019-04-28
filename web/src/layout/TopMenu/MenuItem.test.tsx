@@ -35,10 +35,21 @@ describe("MenuItem", () => {
     const expectedIcon = "icon name";
     const wrapper = shallow(<MenuItem icon={expectedIcon} />);
 
-    const linkElements = wrapper.find("i");
-    expect(linkElements.length).toBe(1);
+    const iconElements = wrapper.find("i");
+    expect(iconElements.length).toBe(1);
 
-    const link = linkElements.first().props().className;
-    expect(link).toEqual(expectedIcon);
+    const icon = iconElements.first().props().className;
+    expect(icon).toEqual(expectedIcon);
+  });
+
+  it("sets text", () => {
+    const expectedText = "menu item text";
+    const wrapper = shallow(<MenuItem icon={""}text={expectedText} />);
+
+    const menuTextElements = wrapper.find(".menu-text");
+    expect(menuTextElements.length).toBe(1);
+
+    const html = menuTextElements.first().html();
+    expect(html).toContain(expectedText);
   });
 });

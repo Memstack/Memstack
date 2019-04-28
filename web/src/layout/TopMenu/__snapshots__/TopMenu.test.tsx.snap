@@ -1,204 +1,652 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TopMenu matches snapshot 1`] = `
-<nav
-  className="Navbar"
->
-  <div
-    className="main"
-  >
-    <div
-      className="left"
-    >
-      <Link
-        replace={false}
-        to="/"
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TopMenu />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="main"
       >
         <div
-          className="item"
+          className="logo"
         >
-          <img
-            src="logo.png"
+          <Link
+            to="/"
+          >
+            <div
+              className="item"
+            >
+              <img
+                src="logo.png"
+              />
+            </div>
+          </Link>
+        </div>
+        <div
+          className="menu left"
+        >
+          <MenuItem
+            icon="fas fa-plus"
+            text=""
+            to="/add-card"
+          />
+          <MenuItem
+            icon="fas fa-book-open"
+            text=""
+            to="/"
+          />
+          <MenuItem
+            icon="fas fa-chart-bar"
+            text=""
+            to="/explore"
           />
         </div>
-      </Link>
-    </div>
-    <div
-      className="right"
-    >
-      <Link
-        key="0"
-        replace={false}
-        to="/account"
-      >
         <div
-          className="item"
+          className="menu right"
         >
-          <span
-            className="icon"
+          <MenuItem
+            icon="fas fa-user"
+            text="Account"
+            to="/account"
+          />
+          <MenuItem
+            icon="fas fa-cog"
+            text="Settings"
+            to="/settings"
+          />
+        </div>
+      </div>,
+      "className": "Navbar",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="logo"
           >
-            <i
-              className="fas fa-user"
+            <Link
+              to="/"
+            >
+              <div
+                className="item"
+              >
+                <img
+                  src="logo.png"
+                />
+              </div>
+            </Link>
+          </div>,
+          <div
+            className="menu left"
+          >
+            <MenuItem
+              icon="fas fa-plus"
+              text=""
+              to="/add-card"
             />
-          </span>
-          <span
-            className="menu-text"
-          >
-            Account
-          </span>
-        </div>
-      </Link>
-      <Link
-        key="1"
-        replace={false}
-        to="/settings"
-      >
-        <div
-          className="item"
-        >
-          <span
-            className="icon"
-          >
-            <i
-              className="fas fa-cog"
+            <MenuItem
+              icon="fas fa-book-open"
+              text=""
+              to="/"
             />
-          </span>
-          <span
-            className="menu-text"
+            <MenuItem
+              icon="fas fa-chart-bar"
+              text=""
+              to="/explore"
+            />
+          </div>,
+          <div
+            className="menu right"
           >
-            Settings
-          </span>
-        </div>
-      </Link>
-    </div>
-    <div
-      className="burger mobile-only"
-      onClick={[Function]}
-    >
-      <span
-        className=""
-      />
-      <span
-        className=""
-      />
-      <span
-        className=""
-      />
-    </div>
-  </div>
-  <div
-    className="dropdown"
-  >
-    <Link
-      key="Account"
-      replace={false}
-      to="/account"
-    >
-      <div
-        className="item"
-      >
-        <span
-          className="icon"
+            <MenuItem
+              icon="fas fa-user"
+              text="Account"
+              to="/account"
+            />
+            <MenuItem
+              icon="fas fa-cog"
+              text="Settings"
+              to="/settings"
+            />
+          </div>,
+        ],
+        "className": "main",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Link
+              to="/"
+            >
+              <div
+                className="item"
+              >
+                <img
+                  src="logo.png"
+                />
+              </div>
+            </Link>,
+            "className": "logo",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <div
+                className="item"
+              >
+                <img
+                  src="logo.png"
+                />
+              </div>,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <img
+                  src="logo.png"
+                />,
+                "className": "item",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "src": "logo.png",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": "div",
+            },
+            "type": [Function],
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <MenuItem
+                icon="fas fa-plus"
+                text=""
+                to="/add-card"
+              />,
+              <MenuItem
+                icon="fas fa-book-open"
+                text=""
+                to="/"
+              />,
+              <MenuItem
+                icon="fas fa-chart-bar"
+                text=""
+                to="/explore"
+              />,
+            ],
+            "className": "menu left",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "0",
+              "nodeType": "function",
+              "props": Object {
+                "icon": "fas fa-plus",
+                "text": "",
+                "to": "/add-card",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "1",
+              "nodeType": "function",
+              "props": Object {
+                "icon": "fas fa-book-open",
+                "text": "",
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "2",
+              "nodeType": "function",
+              "props": Object {
+                "icon": "fas fa-chart-bar",
+                "text": "",
+                "to": "/explore",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <MenuItem
+                icon="fas fa-user"
+                text="Account"
+                to="/account"
+              />,
+              <MenuItem
+                icon="fas fa-cog"
+                text="Settings"
+                to="/settings"
+              />,
+            ],
+            "className": "menu right",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "0",
+              "nodeType": "function",
+              "props": Object {
+                "icon": "fas fa-user",
+                "text": "Account",
+                "to": "/account",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "1",
+              "nodeType": "function",
+              "props": Object {
+                "icon": "fas fa-cog",
+                "text": "Settings",
+                "to": "/settings",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "nav",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="main"
         >
-          <i
-            className="fas fa-user"
-          />
-        </span>
-        <span
-          className="menu-text"
-        >
-          Account
-        </span>
-      </div>
-    </Link>
-    <Link
-      key="Settings"
-      replace={false}
-      to="/settings"
-    >
-      <div
-        className="item"
-      >
-        <span
-          className="icon"
-        >
-          <i
-            className="fas fa-cog"
-          />
-        </span>
-        <span
-          className="menu-text"
-        >
-          Settings
-        </span>
-      </div>
-    </Link>
-    <Link
-      key="Decks"
-      replace={false}
-      to="/"
-    >
-      <div
-        className="item secondary"
-      >
-        <span
-          className="icon"
-        >
-          <i
-            className="fas fa-server"
-          />
-        </span>
-        <span
-          className="menu-text"
-        >
-          Decks
-        </span>
-      </div>
-    </Link>
-    <Link
-      key="Explore"
-      replace={false}
-      to="/"
-    >
-      <div
-        className="item secondary"
-      >
-        <span
-          className="icon"
-        >
-          <i
-            className="fas fa-chart-bar"
-          />
-        </span>
-        <span
-          className="menu-text"
-        >
-          Explore
-        </span>
-      </div>
-    </Link>
-    <Link
-      key="Settings"
-      replace={false}
-      to="/"
-    >
-      <div
-        className="item secondary"
-      >
-        <span
-          className="icon"
-        >
-          <i
-            className="fas fa-cog"
-          />
-        </span>
-        <span
-          className="menu-text"
-        >
-          Settings
-        </span>
-      </div>
-    </Link>
-  </div>
-</nav>
+          <div
+            className="logo"
+          >
+            <Link
+              to="/"
+            >
+              <div
+                className="item"
+              >
+                <img
+                  src="logo.png"
+                />
+              </div>
+            </Link>
+          </div>
+          <div
+            className="menu left"
+          >
+            <MenuItem
+              icon="fas fa-plus"
+              text=""
+              to="/add-card"
+            />
+            <MenuItem
+              icon="fas fa-book-open"
+              text=""
+              to="/"
+            />
+            <MenuItem
+              icon="fas fa-chart-bar"
+              text=""
+              to="/explore"
+            />
+          </div>
+          <div
+            className="menu right"
+          >
+            <MenuItem
+              icon="fas fa-user"
+              text="Account"
+              to="/account"
+            />
+            <MenuItem
+              icon="fas fa-cog"
+              text="Settings"
+              to="/settings"
+            />
+          </div>
+        </div>,
+        "className": "Navbar",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="logo"
+            >
+              <Link
+                to="/"
+              >
+                <div
+                  className="item"
+                >
+                  <img
+                    src="logo.png"
+                  />
+                </div>
+              </Link>
+            </div>,
+            <div
+              className="menu left"
+            >
+              <MenuItem
+                icon="fas fa-plus"
+                text=""
+                to="/add-card"
+              />
+              <MenuItem
+                icon="fas fa-book-open"
+                text=""
+                to="/"
+              />
+              <MenuItem
+                icon="fas fa-chart-bar"
+                text=""
+                to="/explore"
+              />
+            </div>,
+            <div
+              className="menu right"
+            >
+              <MenuItem
+                icon="fas fa-user"
+                text="Account"
+                to="/account"
+              />
+              <MenuItem
+                icon="fas fa-cog"
+                text="Settings"
+                to="/settings"
+              />
+            </div>,
+          ],
+          "className": "main",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Link
+                to="/"
+              >
+                <div
+                  className="item"
+                >
+                  <img
+                    src="logo.png"
+                  />
+                </div>
+              </Link>,
+              "className": "logo",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <div
+                  className="item"
+                >
+                  <img
+                    src="logo.png"
+                  />
+                </div>,
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    src="logo.png"
+                  />,
+                  "className": "item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "src": "logo.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <MenuItem
+                  icon="fas fa-plus"
+                  text=""
+                  to="/add-card"
+                />,
+                <MenuItem
+                  icon="fas fa-book-open"
+                  text=""
+                  to="/"
+                />,
+                <MenuItem
+                  icon="fas fa-chart-bar"
+                  text=""
+                  to="/explore"
+                />,
+              ],
+              "className": "menu left",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "0",
+                "nodeType": "function",
+                "props": Object {
+                  "icon": "fas fa-plus",
+                  "text": "",
+                  "to": "/add-card",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "1",
+                "nodeType": "function",
+                "props": Object {
+                  "icon": "fas fa-book-open",
+                  "text": "",
+                  "to": "/",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "2",
+                "nodeType": "function",
+                "props": Object {
+                  "icon": "fas fa-chart-bar",
+                  "text": "",
+                  "to": "/explore",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <MenuItem
+                  icon="fas fa-user"
+                  text="Account"
+                  to="/account"
+                />,
+                <MenuItem
+                  icon="fas fa-cog"
+                  text="Settings"
+                  to="/settings"
+                />,
+              ],
+              "className": "menu right",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "0",
+                "nodeType": "function",
+                "props": Object {
+                  "icon": "fas fa-user",
+                  "text": "Account",
+                  "to": "/account",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "1",
+                "nodeType": "function",
+                "props": Object {
+                  "icon": "fas fa-cog",
+                  "text": "Settings",
+                  "to": "/settings",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "nav",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
 `;

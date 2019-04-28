@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { RouteChildrenProps } from "react-router";
 import axios from "axios";
+import "./StackById.scss";
 
-type DeckByIdProps = RouteChildrenProps<{ id: string }>;
+type StackByIdProps = RouteChildrenProps<{ id: string }>;
 
 interface Card {
-  DeckId: string;
-  CardDeckInfo: string;
+  StackId: string;
+  CardStackInfo: string;
   Front: string;
   Back: string;
 }
 
 type Cards = Card[];
 
-const DeckById: React.FC<DeckByIdProps> = ({ match }) => {
+const StackById: React.FC<StackByIdProps> = ({ match }) => {
   const [cards, setCards] = useState<Cards>([]);
 
   const getCards = async () => {
     if (match) {
       try {
-        const result = await axios.get<Cards>(`/api/decks/${match.params.id}`);
+        const result = await axios.get<Cards>(`/api/stacks/${match.params.id}`);
 
         setCards(result.data);
       } catch (err) {
@@ -33,21 +34,21 @@ const DeckById: React.FC<DeckByIdProps> = ({ match }) => {
   }, []);
 
   return (
-    <div>
-      <h1>Deck {match && match.params.id}</h1>
+    <div className="StackById centered">
+      <h1>Stack {match && match.params.id}</h1>
       <ul>
         {cards.length ? (
           cards.map(c => (
-            <li key={c.CardDeckInfo}>
+            <li key={c.CardStackInfo}>
               <b>{c.Front}</b>: {c.Back}
             </li>
           ))
         ) : (
-          <p>No cards in this deck</p>
+          <p>No cards in this stack</p>
         )}
       </ul>
     </div>
   );
 };
 
-export default DeckById;
+export default StackById;

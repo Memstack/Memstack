@@ -1,5 +1,5 @@
 import React from "react";
-import Palette from "./node_modules/react-palette";
+import Palette from "react-palette";
 import { IPalette } from "../../../utils/color";
 import Button from "../../button/Button";
 import "./Stack.scss";

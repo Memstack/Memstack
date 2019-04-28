@@ -6,7 +6,7 @@ import "./AddCardForm.scss";
 import { Dropdown, Divider } from "semantic-ui-react";
 import Button from "../../button/Button";
 
-const existingDecks = [
+const existingStacks = [
   { text: "Spanish", value: "spanish" },
   { text: "Italian", value: "italian" },
   { text: "Machine Learning", value: "machine-learning" },
@@ -21,7 +21,7 @@ let existingTags = [
 ];
 
 interface AddCardFormValues {
-  deck: string;
+  stack: string;
   front: string;
   back: string;
   tags: string[];
@@ -37,11 +37,11 @@ const handleAddTag = (
 const AddCardForm = () => (
   <div className="add-card-form">
     <Formik
-      initialValues={{ deck: "", front: "", back: "", tags: [] }}
+      initialValues={{ stack: "", front: "", back: "", tags: [] }}
       validate={(values: AddCardFormValues) => {
         let errors: any = {};
-        if (!values.deck) {
-          errors.deck = "Required";
+        if (!values.stack) {
+          errors.stack = "Required";
         }
         return errors;
       }}
@@ -81,11 +81,11 @@ const AddCardForm = () => (
               )}
             />
             <Field
-              name="deck"
+              name="stack"
               render={({ field, form }) => (
                 <Select
-                  placeholder="Choose a deck"
-                  options={existingDecks}
+                  placeholder="Choose a stack"
+                  options={existingStacks}
                   field={field}
                   form={form}
                 />

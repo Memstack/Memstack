@@ -6,7 +6,7 @@ import { DynamoDB } from "aws-sdk";
 
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   const log = createLogger({
-    name: "getDeck",
+    name: "getStack",
     serializers: { err: stdSerializers.err }
   });
 

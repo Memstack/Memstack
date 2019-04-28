@@ -1,18 +1,11 @@
 @import "../../scss/media";
 @import "../../scss/variables";
 
-.AllDecks {
+.AllStacks {
   display: flex;
   flex-direction: column;
 
-  margin-top: -1.5rem;
-  margin-left: auto;
-  margin-right: auto;
-
-  max-width: 1500px;
-
   @include media-query(small) {
-    width: 80%;
     margin-top: 0;
   }
 
@@ -30,21 +23,21 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .Deck {
+  .Stack {
     margin-top: 2rem;
   }
 
-  .new-deck {
+  .new-stack {
     min-width: 300px;
-    width: $deck-width;
-    height: ($deck-height / 5);
+    width: $stack-width;
+    height: ($stack-height / 5);
     margin: 4rem auto 0 auto;
     min-width: 300px;
     background-color: #f2fdff;
 
     @include media-query(small) {
       margin-top: 2rem;
-      height: $deck-height;
+      height: $stack-height;
     }
 
     border-radius: $card-border-radius;
@@ -82,7 +75,7 @@
   }
 }
 
-.AllDecks:last-child {
+.AllStacks:last-child {
   margin-bottom: 6rem;
 
   @include media-query(small) {

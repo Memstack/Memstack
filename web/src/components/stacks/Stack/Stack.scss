@@ -1,15 +1,15 @@
 @import "../../../scss/index.scss";
 
-a > .Deck {
+a > .Stack {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 
-.Deck {
+.Stack {
   margin-left: auto;
   margin-right: auto;
   min-width: 300px;
-  width: $deck-width;
-  height: $deck-height;
+  width: $stack-width;
+  height: $stack-height;
 
   background-color: white;
   border-radius: $card-border-radius;
@@ -21,7 +21,7 @@ a > .Deck {
   text-align: center;
 
   .cover-image {
-    height: ($deck-height / 2);
+    height: ($stack-height / 2);
 
     border-radius: $card-border-radius $card-border-radius 0 0 !important;
     border-bottom: 1px solid #d4d4d5;
@@ -32,7 +32,7 @@ a > .Deck {
       display: block;
       width: 100%;
       height: auto;
-      min-height: ($deck-height / 2);
+      min-height: ($stack-height / 2);
       margin: 0 auto;
       border-radius: $card-border-radius $card-border-radius 0 0 !important;
     }
@@ -40,7 +40,7 @@ a > .Deck {
 
   .info {
     padding-top: 2rem;
-    .deck-name {
+    .stack-name {
       font-size: 13pt;
       font-weight: 500;
       width: 100%;
