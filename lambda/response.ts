@@ -25,5 +25,5 @@ export const serverError = <T extends ErrorResponse>(
   body: T
 ): APIGatewayProxyResult => ({
   body: JSON.stringify(body),
-  statusCode: 400
+  statusCode: 500
 });
