@@ -8,7 +8,9 @@
     "start": "serverless offline",
     "lint": "eslint ./lambda/**/*.ts",
     "db:install": "serverless dynamodb install",
-    "db:start": "serverless dynamodb start"
+    "db:start": "serverless dynamodb start",
+    "db:stop": "kill $(lsof -t -i tcp:8000)",
+    "db:admin": "dynamodb-admin"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "@types/uuid": "^3.4.4",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "dynamodb-admin": "^3.1.3",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "husky": "^2.1.0",
