@@ -1,7 +1,15 @@
 openapi: "3.0.0"
+
 info:
   title: Memstack API
   version: 1.0.0
+
+servers:
+  - description: Local
+    url: http://localhost:3000
+
+  - description: Development
+    url: https://dev.memstack.io/api
 
 paths:
   /cards:
@@ -12,11 +20,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Card"
+                $ref: "#/components/schemas/card"
 
 components:
   schemas:
-    Card:
+    card:
       type: object
       properties:
         front:
