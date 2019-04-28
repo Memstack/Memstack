@@ -1,0 +1,10 @@
+openapi: "3.0.0"
+info:
+  title: Memstack API
+  version: 1.0.0
+paths:
+  /cards:
+    post:
+      responses:
+        200:
+          description: Created Card
