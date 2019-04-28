@@ -1,27 +1,15 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { DynamoDB } from "aws-sdk";
+
 import { createLogger, stdSerializers } from "bunyan";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
 import { clientError, created, serverError } from "./response";
+import { getDynamoClient } from "./client";
 
 interface IncomingCard {
   front: string;
   back: string;
 }
-
-const getDynamoClient = (): DynamoDB.DocumentClient => {
-  if (process.env.NODE_ENV === "development") {
-    return new DynamoDB.DocumentClient({
-      region: "localhost",
-      endpoint: "http://localhost:8000",
-      accessKeyId: "DEFAULT_ACCESS_KEY",
-      secretAccessKey: "DEFAULT_SECRET"
-    });
-  } else {
-    return new DynamoDB.DocumentClient();
-  }
-};
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const log = createLogger({

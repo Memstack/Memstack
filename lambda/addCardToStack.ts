@@ -1,9 +1,9 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import "source-map-support/register";
 import { createLogger, stdSerializers } from "bunyan";
-import { DynamoDB } from "aws-sdk";
-import { created } from "./response";
+import "source-map-support/register";
 import { dynamoCardSchema } from "../schema/card";
+import { getDynamoClient } from "./client";
+import { created, serverError } from "./response";
 
 interface CardToAdd {
   stackId: string;
@@ -16,32 +16,42 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     serializers: { err: stdSerializers.err }
   });
 
+  log.info("This is working");
+
   const cardDetails: CardToAdd = {
     stackId: (event.pathParameters && event.pathParameters.stackid) || "",
     cardId: (event.pathParameters && event.pathParameters.cardid) || ""
   };
-  let documentClient: DynamoDB.DocumentClient;
-  if (process.env.NODE_ENV === "development") {
-    documentClient = new DynamoDB.DocumentClient({
-      region: "localhost",
-      endpoint: "http://localhost:8000",
-      accessKeyId: "DEFAULT_ACCESS_KEY",
-      secretAccessKey: "DEFAULT_SECRET"
-    });
-  } else {
-    documentClient = new DynamoDB.DocumentClient();
-  }
+
+  const documentClient = getDynamoClient();
+
   const tableName = "Memstack";
   var getParams = {
     TableName: tableName,
     Key: {
-      HashKey: cardDetails.cardId
+      pkey: cardDetails.cardId,
+      skey: "UserId:DummyUser#StackId:Stack-All"
     }
   };
-  const dynamoResponse = await documentClient.get(getParams).promise();
+
+  log.info({ cardId: cardDetails.cardId }, "Getting card by ID");
+
+  let dynamoResponse;
+
+  try {
+    dynamoResponse = await documentClient.get(getParams).promise();
+  } catch (err) {
+    log.error({ err });
+
+    return serverError({ error: "OOOPS" });
+  }
+
   log.fatal({ dynamoResponse });
+
   const card = await dynamoCardSchema.validate(dynamoResponse.Item);
+
   log.fatal({ card });
+
   const params = {
     TableName: tableName,
     Item: {
