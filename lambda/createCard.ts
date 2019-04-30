@@ -50,5 +50,5 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   await documentClient.put(params).promise();
 
-  return created();
+  return created({ id });
 };
