@@ -23,6 +23,17 @@ paths:
       responses:
         200:
           description: Created Card
+  /stacks:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/stack"
+
+      responses:
+        200:
+          description: Created Stack
 
 components:
   schemas:
@@ -32,4 +43,9 @@ components:
         front:
           type: string
         back:
+          type: string
+    stack:
+      type: object
+      properties:
+        title:
           type: string
