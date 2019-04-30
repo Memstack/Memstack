@@ -39,7 +39,7 @@ package:
 
 functions:
   getStack:
-    handler: lambda/getDeck.handler
+    handler: lambda/getStack.handler
     events:
       - http:
           method: get
@@ -50,6 +50,12 @@ functions:
       - http:
           method: post
           path: cards
+  createStack:
+    handler: lambda/createStack.handler
+    events:
+      - http:
+          method: post
+          path: stacks
   addCardToStack:
     handler: lambda/addCardToStack.handler
     events:
