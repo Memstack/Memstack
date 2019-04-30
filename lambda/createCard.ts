@@ -1,3 +1,4 @@
+import * as yup from "yup";
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
@@ -5,11 +6,17 @@ import { getDynamoClient } from "./client";
 import { getEnv } from "./createStack";
 import { getLogger } from "./logger";
 import { clientError, created, serverError } from "./response";
+import { defaultValidationOptions } from "./validation";
 
 interface IncomingCard {
   front: string;
   back: string;
 }
+
+const incomingCardSchema = yup.object<IncomingCard>({
+  front: yup.string().required(),
+  back: yup.string().required()
+});
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const log = getLogger({ name: "createCard" });
@@ -26,15 +33,19 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return clientError({ error: "No event body" });
   }
 
-  const card: IncomingCard = JSON.parse(event.body);
+  let card: IncomingCard = JSON.parse(event.body);
+
+  try {
+    card = await incomingCardSchema.validate(card, defaultValidationOptions);
+  } catch (err) {
+    const { message } = err as yup.ValidationError;
+
+    log.error({ message }, "Failed to validate new card");
+
+    return clientError({ error: message });
+  }
 
   const documentClient = getDynamoClient();
-
-  if (!tableName) {
-    log.fatal("TABLE_NAME not set");
-
-    return serverError({ error: "No table name specified" });
-  }
 
   const id = uuid();
 
@@ -50,5 +61,5 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   await documentClient.put(params).promise();
 
-  return created({ id });
+  return created({ ...card, id });
 };

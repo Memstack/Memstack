@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { getDynamoClient } from "./client";
 import { getLogger } from "./logger";
 import { clientError, created, serverError } from "./response";
+import { defaultValidationOptions } from "./validation";
 
 interface IncomingStack {
   title: string;
@@ -42,9 +43,13 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   let stack: IncomingStack = JSON.parse(event.body);
 
   try {
-    stack = await incomingStackSchema.validate(stack);
+    stack = await incomingStackSchema.validate(stack, defaultValidationOptions);
   } catch (err) {
-    return clientError({ error: (err as yup.ValidationError).message });
+    const { message } = err as yup.ValidationError;
+
+    log.error({ message }, "Failed to validate new stack");
+
+    return clientError({ error: message });
   }
 
   const documentClient = getDynamoClient();
@@ -64,5 +69,5 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   await documentClient.put(params).promise();
 
-  return created({ id });
+  return created({ ...stack, id });
 };
