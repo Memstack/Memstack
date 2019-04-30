@@ -1,6 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
+import * as yup from "yup";
 import { getDynamoClient } from "./client";
 import { getLogger } from "./logger";
 import { clientError, created, serverError } from "./response";
@@ -8,6 +9,10 @@ import { clientError, created, serverError } from "./response";
 interface IncomingStack {
   title: string;
 }
+
+const incomingStackSchema = yup.object<IncomingStack>({
+  title: yup.string().required()
+});
 
 export const getEnv = (name: string): string => {
   const envVar = process.env[name];
@@ -34,7 +39,13 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return clientError({ error: "No event body" });
   }
 
-  const stack: IncomingStack = JSON.parse(event.body);
+  let stack: IncomingStack = JSON.parse(event.body);
+
+  try {
+    stack = await incomingStackSchema.validate(stack);
+  } catch (err) {
+    return clientError({ error: (err as yup.ValidationError).message });
+  }
 
   const documentClient = getDynamoClient();
 
