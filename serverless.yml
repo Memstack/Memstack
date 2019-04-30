@@ -61,7 +61,7 @@ functions:
     events:
       - http:
           method: post
-          path: stacks/{stackid}/cards/{cardid}
+          path: stacks/{stackId}/cards/{cardId}
           request:
             parameters:
               path:

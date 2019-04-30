@@ -1,15 +1,21 @@
+import * as yup from "yup";
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import { dynamoCardSchema } from "../schema/card";
 import { getDynamoClient } from "./client";
 import { getEnv } from "./createStack";
 import { getLogger } from "./logger";
-import { created, serverError } from "./response";
+import { created, serverError, clientError } from "./response";
 
 interface CardToAdd {
   stackId: string;
   cardId: string;
 }
+
+const cardToAddSchema = yup.object<CardToAdd>({
+  cardId: yup.string().required(),
+  stackId: yup.string().required()
+});
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const log = getLogger({ name: "addCardToStack" });
@@ -22,10 +28,12 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return serverError({ error: "TABLE_NAME not set" });
   }
 
-  const cardDetails: CardToAdd = {
-    stackId: (event.pathParameters && event.pathParameters.stackid) || "",
-    cardId: (event.pathParameters && event.pathParameters.cardid) || ""
-  };
+  let cardDetails;
+  try {
+    cardDetails = await cardToAddSchema.validate(event.pathParameters);
+  } catch (err) {
+    return clientError({ error: (err as yup.ValidationError).message });
+  }
 
   const documentClient = getDynamoClient();
 
