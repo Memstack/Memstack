@@ -1,32 +1,46 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-
-import { createLogger, stdSerializers } from "bunyan";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
-import { clientError, created } from "./response";
 import { getDynamoClient } from "./client";
+import { getLogger } from "./logger";
+import { clientError, created, serverError } from "./response";
 
-interface Incomingstack {
+interface IncomingStack {
   title: string;
 }
 
+export const getEnv = (name: string): string => {
+  const envVar = process.env[name];
+
+  if (!envVar) {
+    throw new Error(`Environment variable '${name}' is not set`);
+  } else {
+    return envVar;
+  }
+};
+
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  const log = createLogger({
-    name: "createCard",
-    serializers: { err: stdSerializers.err }
-  });
+  const log = getLogger({ name: "createStack" });
+
+  let tableName;
+  try {
+    tableName = getEnv("TABLE_NAME");
+  } catch (err) {
+    log.error({ err });
+    return serverError({ error: "TABLE_NAME not set" });
+  }
 
   if (!event.body) {
     return clientError({ error: "No event body" });
   }
 
-  const stack: Incomingstack = JSON.parse(event.body);
+  const stack: IncomingStack = JSON.parse(event.body);
 
   const documentClient = getDynamoClient();
 
-  const tableName = "Memstack";
+  const id = uuid();
 
-  const id: string = uuid();
+  log.info({ stackId: id }, "Creating new stack");
 
   const params = {
     TableName: tableName,

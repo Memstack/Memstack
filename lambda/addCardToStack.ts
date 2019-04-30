@@ -1,8 +1,9 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { createLogger, stdSerializers } from "bunyan";
 import "source-map-support/register";
 import { dynamoCardSchema } from "../schema/card";
 import { getDynamoClient } from "./client";
+import { getEnv } from "./createStack";
+import { getLogger } from "./logger";
 import { created, serverError } from "./response";
 
 interface CardToAdd {
@@ -11,12 +12,15 @@ interface CardToAdd {
 }
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  const log = createLogger({
-    name: "createCard",
-    serializers: { err: stdSerializers.err }
-  });
+  const log = getLogger({ name: "addCardToStack" });
 
-  log.info("This is working");
+  let tableName;
+  try {
+    tableName = getEnv("TABLE_NAME");
+  } catch (err) {
+    log.error({ err });
+    return serverError({ error: "TABLE_NAME not set" });
+  }
 
   const cardDetails: CardToAdd = {
     stackId: (event.pathParameters && event.pathParameters.stackid) || "",
@@ -25,7 +29,6 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const documentClient = getDynamoClient();
 
-  const tableName = "Memstack";
   var getParams = {
     TableName: tableName,
     Key: {
@@ -43,14 +46,10 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   } catch (err) {
     log.error({ err });
 
-    return serverError({ error: "OOOPS" });
+    return serverError({ error: "Failed to copy exising card" });
   }
 
-  log.fatal({ dynamoResponse });
-
   const card = await dynamoCardSchema.validate(dynamoResponse.Item);
-
-  log.fatal({ card });
 
   const params = {
     TableName: tableName,
