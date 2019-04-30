@@ -9,8 +9,19 @@ Resources:
           AttributeType: S
         - AttributeName: skey
           AttributeType: S
+        - AttributeName: data
+          AttributeType: S
       KeySchema:
         - AttributeName: pkey
           KeyType: HASH
         - AttributeName: skey
           KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: SkeyData
+          KeySchema:
+            - AttributeName: skey
+              KeyType: HASH
+            - AttributeName: data
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
