@@ -31,12 +31,6 @@ provider:
         - dynamodb:DeleteItem
       Resource: !GetAtt MemstackTable.Arn
 
-package:
-  exclude:
-    - ./**
-  include:
-    - ./bin/**
-
 functions:
   createCard:
     handler: lambda/createCard.handler
@@ -91,3 +85,6 @@ custom:
         sources:
           - table: Memstack
             sources: [./seed-data.json]
+
+  webpack:
+    excludeFiles: lambda/*.test.ts
