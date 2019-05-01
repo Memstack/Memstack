@@ -13,7 +13,7 @@ interface CardToAdd {
   cardId: string;
 }
 
-const uuidErrorMessage = "${key} should be a valid UUID";
+const uuidErrorMessage = "${path} should be a valid UUID";
 
 const cardToAddSchema = yup.object<CardToAdd>({
   cardId: yup
