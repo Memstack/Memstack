@@ -18,6 +18,17 @@ export const getEnv = (name: string): string => {
   }
 };
 
+const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
+  queryResult.map(item => ({
+    id: normaliseStackId(item.pkey),
+    title: item.data
+  }));
+
+interface Stack {
+  id: string;
+  title: string;
+}
+
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   const log = getLogger({ name: "createStack" });
 
@@ -30,10 +41,6 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   }
 
   const documentClient = getDynamoClient();
-
-  const id = uuid();
-
-  log.info({ stackId: id }, "Creating new stack");
 
   const params: DocumentClient.QueryInput = {
     TableName: tableName,
@@ -49,9 +56,6 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   const result = await documentClient.query(params).promise();
 
   return success({
-    items: (result.Items as DynamoStack[]).map(item => ({
-      id: normaliseStackId(item.pkey),
-      title: item.data
-    }))
+    items: mapToResponse(result.Items as DynamoStack[])
   });
 };
