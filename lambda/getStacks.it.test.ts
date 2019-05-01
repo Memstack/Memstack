@@ -21,11 +21,15 @@ describe("GET /stacks", () => {
       .get("/stacks")
       .expect(200);
 
-    expect(res.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ id: stack1.body.id }),
-        expect.objectContaining({ id: stack2.body.id })
-      ])
+    const responseStack1 = (res.body.items as { id: string }[]).find(
+      item => item.id === stack1.body.id
     );
+
+    const responseStack2 = (res.body.items as { id: string }[]).find(
+      item => item.id === stack2.body.id
+    );
+
+    expect(responseStack1).toBeDefined();
+    expect(responseStack2).toBeDefined();
   });
 });
