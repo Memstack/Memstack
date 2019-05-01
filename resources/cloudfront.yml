@@ -36,8 +36,8 @@ Resources:
                 - Accept
               QueryString: true
             MinTTL: 0
-            MaxTTL: 3600
-            DefaultTTL: 300
+            MaxTTL: 0
+            DefaultTTL: 0
             ViewerProtocolPolicy: redirect-to-https
             TargetOriginId: "api-gateway"
         Origins:
@@ -69,6 +69,16 @@ Resources:
       HostedZoneName: memstack.io.
       Name: dev.memstack.io
       Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFrontDistribution.DomainName
+        HostedZoneId: "Z2FDTNDATAQYW2" # Global HostedZone for CloudFront distrobutions
+
+  CloudFrontDNSRecordIPv6:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: memstack.io.
+      Name: dev.memstack.io
+      Type: AAAA
       AliasTarget:
         DNSName: !GetAtt CloudFrontDistribution.DomainName
         HostedZoneId: "Z2FDTNDATAQYW2" # Global HostedZone for CloudFront distrobutions
