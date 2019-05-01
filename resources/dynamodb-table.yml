@@ -2,7 +2,6 @@ Resources:
   MemstackTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
-      TableName: Memstack
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: pkey

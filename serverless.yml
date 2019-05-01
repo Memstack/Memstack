@@ -13,7 +13,7 @@ provider:
   runtime: nodejs8.10
   profile: memstack
   environment:
-    TABLE_NAME: Memstack
+    TABLE_NAME: !Ref MemstackTable
   apiKeys:
     - dev
   region: eu-west-2
@@ -29,7 +29,9 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: !GetAtt MemstackTable.Arn
+      Resource:
+        - !GetAtt MemstackTable.Arn
+        - !Sub "{MemstackTable.Arn}/index/*"
 
 functions:
   createCard:
@@ -90,7 +92,7 @@ custom:
     seed:
       dev:
         sources:
-          - table: Memstack
+          - table: !Ref
             sources: [./seed-data.json]
 
   webpack:
