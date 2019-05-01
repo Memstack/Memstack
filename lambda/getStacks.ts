@@ -1,6 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
+import { v4 as uuid } from "uuid";
 import { DynamoStack } from "../schema/card";
 import { getDynamoClient } from "./client";
 import { getLogger } from "./logger";
