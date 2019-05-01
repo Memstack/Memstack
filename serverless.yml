@@ -29,7 +29,13 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: !GetAtt MemstackTable.Arn
+      Resource:
+        - !GetAtt MemstackTable.Arn
+        - Fn::Join:
+            - "/"
+            - - !GetAtt MemstackTable.Arn
+              - "index"
+              - "SkeyData"
 
 functions:
   createCard:
