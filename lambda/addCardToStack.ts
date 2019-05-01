@@ -6,15 +6,24 @@ import { getDynamoClient } from "./client";
 import { getEnv } from "./createStack";
 import { getLogger } from "./logger";
 import { clientError, created, serverError } from "./response";
+import { uuidRegex } from "./uuid";
 
 interface CardToAdd {
   stackId: string;
   cardId: string;
 }
 
+const uuidErrorMessage = "${key} should be a valid UUID";
+
 const cardToAddSchema = yup.object<CardToAdd>({
-  cardId: yup.string().required(),
-  stackId: yup.string().required()
+  cardId: yup
+    .string()
+    .required()
+    .matches(uuidRegex, uuidErrorMessage),
+  stackId: yup
+    .string()
+    .required()
+    .matches(uuidRegex, uuidErrorMessage)
 });
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
@@ -23,6 +32,8 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   let tableName;
   try {
     tableName = getEnv("TABLE_NAME");
+
+    log.info({ tableName }, "Table name is set");
   } catch (err) {
     log.error({ err });
     return serverError({ error: "TABLE_NAME not set" });
@@ -57,7 +68,16 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return serverError({ error: "Failed to copy exising card" });
   }
 
-  const card = await dynamoCardSchema.validate(dynamoResponse.Item);
+  let card;
+  try {
+    card = await dynamoCardSchema.validate(dynamoResponse.Item);
+  } catch (err) {
+    const { message } = err as yup.ValidationError;
+
+    log.error({ message }, "Failed to validate add card to stack");
+
+    return clientError({ error: message });
+  }
 
   const params = {
     TableName: tableName,
