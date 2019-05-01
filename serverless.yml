@@ -31,7 +31,11 @@ provider:
         - dynamodb:DeleteItem
       Resource:
         - !GetAtt MemstackTable.Arn
-        - !Sub "{MemstackTable.Arn}/index/*"
+        - Fn::Join:
+            - "/"
+            - - !GetAtt MemstackTable.Arn
+              - "index"
+              - "SkeyData"
 
 functions:
   createCard:
