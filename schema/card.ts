@@ -8,7 +8,11 @@ export interface DynamoCard extends DyanmoItem {
 export interface DyanmoItem {
   pkey: string;
   skey: string;
+  data: string;
 }
+
+// No additional attributes on DynamoStack currently
+export type DynamoStack = DyanmoItem;
 
 export const dynamoCardSchema = yup.object({
   pkey: yup.string().required(),

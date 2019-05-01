@@ -46,6 +46,13 @@ functions:
           method: post
           path: stacks
 
+  getStacks:
+    handler: lambda/getStacks.handler
+    events:
+      - http:
+          method: get
+          path: stacks
+
   addCardToStack:
     handler: lambda/addCardToStack.handler
     events:

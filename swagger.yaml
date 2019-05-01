@@ -18,7 +18,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/card"
+              $ref: "#/components/schemas/Card"
 
       responses:
         200:
@@ -29,23 +29,44 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/stack"
+              $ref: "#/components/schemas/Stack"
 
       responses:
         200:
           description: Created Stack
 
+    get:
+      responses:
+        200:
+          description: List of Cards
+
 components:
   schemas:
-    card:
+    Card:
       type: object
       properties:
         front:
           type: string
         back:
           type: string
-    stack:
+      required:
+        - front
+        - back
+
+    Stack:
       type: object
       properties:
         title:
           type: string
+      required:
+        - title
+
+    StackWithId:
+      allOf: # Combines the Stack and the inline model
+        - $ref: "#/components/schemas/Stack"
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
