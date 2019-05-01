@@ -5,8 +5,8 @@ import { dynamoCardSchema } from "../schema/card";
 import { getDynamoClient } from "./client";
 import { getEnv } from "./createStack";
 import { getLogger } from "./logger";
-import { clientError, created, serverError } from "./response";
-import { uuidRegex } from "./uuid";
+import { clientError, created, serverError, notFound } from "./response";
+import { uuidRegex, denormaliseCardId } from "./uuid";
 
 interface CardToAdd {
   stackId: string;
@@ -48,15 +48,17 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const documentClient = getDynamoClient();
 
+  const cardId = denormaliseCardId(cardDetails.cardId);
+
   var getParams = {
     TableName: tableName,
     Key: {
-      pkey: cardDetails.cardId,
+      pkey: cardId,
       skey: "UserId:DummyUser#StackId:Stack-All"
     }
   };
 
-  log.info({ cardId: cardDetails.cardId }, "Getting card by ID");
+  log.info({ cardId }, "Getting card by ID");
 
   let dynamoResponse;
 
@@ -68,6 +70,10 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return serverError({ error: "Failed to copy exising card" });
   }
 
+  if (!dynamoResponse.Item) {
+    return notFound({ error: "The specified card was not found" });
+  }
+
   let card;
   try {
     card = await dynamoCardSchema.validate(dynamoResponse.Item);
@@ -76,7 +82,9 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
     log.error({ message }, "Failed to validate add card to stack");
 
-    return clientError({ error: message });
+    return clientError({
+      error: `The specified card is not valid: ${message}`
+    });
   }
 
   const params = {

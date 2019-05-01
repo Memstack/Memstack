@@ -14,16 +14,18 @@ interface ErrorResponse {
   error: string;
 }
 
-export const clientError = <T extends ErrorResponse>(
+const error = <T extends ErrorResponse>(
+  statusCode: number,
   body: T
 ): APIGatewayProxyResult => ({
   body: JSON.stringify(body),
-  statusCode: 400
+  statusCode
 });
 
-export const serverError = <T extends ErrorResponse>(
-  body: T
-): APIGatewayProxyResult => ({
-  body: JSON.stringify(body),
-  statusCode: 500
-});
+export const clientError = <T extends ErrorResponse>(body: T) =>
+  error(400, body);
+
+export const notFound = <T extends ErrorResponse>(body: T) => error(404, body);
+
+export const serverError = <T extends ErrorResponse>(body: T) =>
+  error(500, body);
