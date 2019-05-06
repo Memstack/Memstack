@@ -10,9 +10,9 @@ import { normaliseStackId } from "./uuid";
 const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
   queryResult.map(item => ({
     id: normaliseStackId(item.pkey),
-    title: item.data["title"],
-    description: item.data["description"],
-    image: item.data["image"]
+    title: item.data,
+    description: item.description,
+    image: item.image
   }));
 
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
@@ -40,7 +40,7 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   };
 
   const result = await documentClient.query(params).promise();
-
+  log.error(result);
   return success({
     items: mapToResponse(result.Items as DynamoStack[])
   });
