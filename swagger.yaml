@@ -20,10 +20,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Card"
-
       responses:
-        200:
+        201:
           description: Created Card
+
   /stacks:
     post:
       summary: Add a stacks
@@ -34,7 +34,7 @@ paths:
               $ref: "#/components/schemas/Stack"
 
       responses:
-        200:
+        201:
           description: Created Stack
 
     get:
@@ -42,23 +42,37 @@ paths:
       responses:
         200:
           description: List of Cards
-  /stacks/{stackid}/cards/{cardid}:
+
+  /stacks/{stackId}:
+    get:
+      summary: Get a stack
+      parameters:
+        - in: path
+          name: stackId
+          description: The ID of the stack to get
+          schema:
+            type: string
+          required: true
+
+  /stacks/{stackId}/cards/{cardId}:
     post:
       summary: Adds a card to a stack
       parameters:
         - in: path
-          name: stackid
-          description: "The stack to add the card too"
+          name: stackId
+          description: "The stack to add the card to"
           schema:
             type: string
           required: true
         - in: path
-          name: cardid
+          name: cardId
           description: "The card to be added"
           schema:
             type: string
           required: true
-          
+      responses:
+        201:
+          description: Added card to stack
 
 components:
   schemas:
