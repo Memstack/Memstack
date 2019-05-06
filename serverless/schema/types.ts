@@ -25,3 +25,9 @@ export interface Stack {
   id: string;
   title: string;
 }
+
+export interface Card {
+  id: string;
+  front: string;
+  back: string;
+}
