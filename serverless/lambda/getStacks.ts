@@ -40,7 +40,6 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   };
 
   const result = await documentClient.query(params).promise();
-  log.error(result);
   return success({
     items: mapToResponse(result.Items as DynamoStack[])
   });

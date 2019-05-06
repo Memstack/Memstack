@@ -45,7 +45,15 @@ functions:
           method: post
           path: cards
           cors: true
-
+  getCardsByUser:
+    handler: lambda/getCards.handler
+    events:
+      - http:
+          method: get
+          path: cards/{userId}
+          request:
+            path:
+              userId: true
   createStack:
     handler: lambda/createStack.handler
     events:

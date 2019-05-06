@@ -3,19 +3,22 @@
     "pkey": "Card-1",
     "skey": "UserId:DummyUser#StackId:Stack-All",
     "front": "Card-1 front",
-    "back": "Card-1 back"
+    "back": "Card-1 back",
+    "data": "0"
   },
   {
     "pkey": "Card-2",
     "skey": "UserId:DummyUser#StackId:Stack-All",
     "front": "Card-2 front",
-    "back": "Card-2 back"
+    "back": "Card-2 back",
+    "data": "0"
   },
   {
     "pkey": "Card-3",
     "skey": "UserId:DummyUser#StackId:Stack-All",
     "front": "Card-3 front",
-    "back": "Card-3 back"
+    "back": "Card-3 back",
+    "data": "0"
   },
   {
     "pkey": "Stack-All",
