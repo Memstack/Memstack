@@ -14,6 +14,7 @@ servers:
 paths:
   /cards:
     post:
+      summary: Add a card
       requestBody:
         content:
           application/json:
@@ -25,6 +26,7 @@ paths:
           description: Created Card
   /stacks:
     post:
+      summary: Add a stacks
       requestBody:
         content:
           application/json:
@@ -36,9 +38,27 @@ paths:
           description: Created Stack
 
     get:
+      summary: Gets all stacks
       responses:
         200:
           description: List of Cards
+  /stacks/{stackid}/cards/{cardid}:
+    post:
+      summary: Adds a card to a stack
+      parameters:
+        - in: path
+          name: stackid
+          description: "The stack to add the card too"
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: cardid
+          description: "The card to be added"
+          schema:
+            type: string
+          required: true
+          
 
 components:
   schemas:
