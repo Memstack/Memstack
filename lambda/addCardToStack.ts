@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import * as yup from "yup";
-import { dynamoCardSchema } from "../schema/card";
+import { dynamoCardSchema } from "../schema/types";
 import { getDynamoClient } from "./client";
 import { getEnv } from "./createStack";
 import { getLogger } from "./logger";
