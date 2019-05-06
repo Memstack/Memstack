@@ -16,5 +16,10 @@
     "skey": "UserId:DummyUser#StackId:Stack-All",
     "front": "Card-3 front",
     "back": "Card-3 back"
+  },
+  {
+    "pkey": "Stack-All",
+    "skey": "UserId:DummyUser#Stack",
+    "title": "A good stack"
   }
 ]
