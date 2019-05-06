@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
-import { DynamoStack } from "../schema/types";
+import { DynamoStack, Stack } from "../schema/types";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { serverError, success } from "./response";
@@ -12,11 +12,6 @@ const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
     id: normaliseStackId(item.pkey),
     title: item.data
   }));
-
-interface Stack {
-  id: string;
-  title: string;
-}
 
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   const log = getLogger({ name: "createStack" });

@@ -20,3 +20,8 @@ export const dynamoCardSchema = yup.object({
   front: yup.string().required(),
   back: yup.string().required()
 });
+
+export interface Stack {
+  id: string;
+  title: string;
+}
