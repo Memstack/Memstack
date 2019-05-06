@@ -2,12 +2,20 @@ import { APIGatewayProxyResult } from "aws-lambda";
 
 export const created = <T extends object>(body?: T): APIGatewayProxyResult => ({
   body: body ? JSON.stringify(body) : "",
-  statusCode: 201
+  statusCode: 201,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true
+  }
 });
 
 export const success = <T extends object>(body: T): APIGatewayProxyResult => ({
   body: JSON.stringify(body),
-  statusCode: 200
+  statusCode: 200,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true
+  }
 });
 
 interface ErrorResponse {
