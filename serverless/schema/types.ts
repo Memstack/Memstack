@@ -24,6 +24,8 @@ export const dynamoCardSchema = yup.object({
 export interface Stack {
   id: string;
   title: string;
+  description: string;
+  img: string;
 }
 
 export interface Card {

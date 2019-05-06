@@ -1,7 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
 import TopMenu from "./TopMenu/TopMenu";
-import SideMenu from "./SideMenu/SideMenu";
 import "./Layout.scss";
 import BottomMenu from "./BottomMenu/BottomMenu";
 
