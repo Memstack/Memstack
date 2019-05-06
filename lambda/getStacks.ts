@@ -2,20 +2,10 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
 import { DynamoStack } from "../schema/card";
-import { getDynamoClient } from "./client";
+import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { serverError, success } from "./response";
 import { normaliseStackId } from "./uuid";
-
-export const getEnv = (name: string): string => {
-  const envVar = process.env[name];
-
-  if (!envVar) {
-    throw new Error(`Environment variable '${name}' is not set`);
-  } else {
-    return envVar;
-  }
-};
 
 const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
   queryResult.map(item => ({
