@@ -38,7 +38,7 @@ paths:
     get:
       responses:
         200:
-          description: List of Cards
+          description: List of Stacks
 
 components:
   schemas:
