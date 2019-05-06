@@ -1,13 +1,14 @@
 {
   "extends": "../tsconfig-base.json",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "lib": ["es2017", "dom"],
+    "lib": ["es2017"],
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "target": "es2017",
     "outDir": "lib",
+    "composite": true
   },
-  "include": ["lambda", "schema"],
-  "exclude": ["node_modules"]
+  "include": ["*.ts"],
 }
+
+

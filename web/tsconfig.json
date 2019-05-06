@@ -1,16 +1,12 @@
 {
+  "extends": "../tsconfig-base.json",
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "sourceMap": true,
+    "lib": ["es6", "dom"],
     "allowJs": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -19,11 +15,8 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": false,
-    "esModuleInterop": true,
-    "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true
@@ -37,7 +30,6 @@
     "jest",
     "src/setupTests.ts"
   ],
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "../schema" }]
 }

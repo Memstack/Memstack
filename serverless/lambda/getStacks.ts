@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
-import { DynamoStack, Stack } from "../schema/types";
+import { DynamoStack, Stack } from "../../schema";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { serverError, success } from "./response";
@@ -10,7 +10,9 @@ import { normaliseStackId } from "./uuid";
 const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
   queryResult.map(item => ({
     id: normaliseStackId(item.pkey),
-    title: item.data
+    title: item.data["title"],
+    description: item.data["description"],
+    image: item.data["image"]
   }));
 
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
