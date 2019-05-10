@@ -53,6 +53,9 @@ paths:
           schema:
             type: string
           required: true
+      responses:
+        200:
+          description: Got stack
 
   /stacks/{stackId}/cards/{cardId}:
     post:

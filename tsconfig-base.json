@@ -6,10 +6,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": false,
-    "strict": true,
+    "strict": true
   },
   "exclude": ["node_modules"]
 }
-
-
-
