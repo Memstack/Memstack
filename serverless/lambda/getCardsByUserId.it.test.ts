@@ -1,6 +1,6 @@
 import { agent } from "supertest";
 
-describe("GET /cards", () => {
+describe("GET /user/{userId}/cards", () => {
   it("it responds 200 with a list of cards", async () => {
     // Arrange
     const front = "Front";
@@ -18,7 +18,7 @@ describe("GET /cards", () => {
 
     // Act/Assert
     const res = await agent("http://localhost:3000")
-      .get("/cards/47985f6b-436d-468e-a8ff-82936d61d1ea")
+      .get("/user/47985f6b-436d-468e-a8ff-82936d61d1ea/cards")
       .expect(200);
 
     const responseStack1 = (res.body.items as { id: string }[]).find(
