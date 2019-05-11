@@ -5,7 +5,8 @@ import { DynamoCard, DynamoStack } from "../schema/types";
 import { getDynamoClient, getEnv } from "./client";
 import { mapToCardsList } from "./getCards";
 import { getLogger } from "./logger";
-import { clientError, success } from "./response";
+import { clientError, success, notFound } from "./response";
+import { denormaliseStackId } from "./uuid";
 
 interface GetStackByIdParams {
   stackId: string;
@@ -28,14 +29,14 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
       event.pathParameters
     ));
   } catch (err) {
-    return clientError({ error: "Missing stack Id parameter" });
+    return clientError({ error: "Missing stack ID parameter" });
   }
 
   // Query Dynamo for stack metadata
   const getStackParams: DocumentClient.GetItemInput = {
     TableName: tableName,
     Key: {
-      pkey: "Stack-All",
+      pkey: denormaliseStackId(stackId),
       skey: "UserId:DummyUser#Stack"
     }
   };
@@ -43,6 +44,12 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const stackResult = await documentClient.get(getStackParams).promise();
 
   const item = stackResult.Item as DynamoStack;
+
+  if (!item) {
+    return notFound({ error: "Could not find the specified stack" });
+  }
+
+  log.info({ item });
 
   const cardsAvl = `UserId:DummyUser#StackId:${stackId}`;
 
@@ -54,9 +61,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     KeyConditions: {
       skey: {
         ComparisonOperator: "EQ",
-        AttributeValueList: [
-          "UserId:DummyUser#StackId:393373d0-7afc-43fc-a41f-33c4cdaf2d65"
-        ]
+        AttributeValueList: [cardsAvl]
       }
     },
     IndexName: "SkeyData"

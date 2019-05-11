@@ -1,22 +1,17 @@
 [
   {
-    "pkey": "Card-1",
-    "skey": "UserId:DummyUser#StackId:Stack-All",
-    "data": "{\"front\":\"Card-1 front\",\"back\":\"Card-1 back\"}"
+    "data": "{\"front\":\"Yeah\",\"back\":\"Hell\"}",
+    "skey": "UserId:DummyUser#StackId:1e4ad445-43bd-4ef0-ac57-249bd220684c",
+    "pkey": "Card-d7c3ceb6-c70d-4533-a136-a41009cb11bc"
   },
   {
-    "pkey": "Card-2",
+    "data": "{\"front\":\"Yeah\",\"back\":\"Hell\"}",
     "skey": "UserId:DummyUser#StackId:Stack-All",
-    "data": "{\"front\":\"Card-2 front\",\"back\":\"Card-2 back\"}"
+    "pkey": "Card-d7c3ceb6-c70d-4533-a136-a41009cb11bc"
   },
   {
-    "pkey": "Card-3",
-    "skey": "UserId:DummyUser#StackId:Stack-All",
-    "data": "{\"front\":\"Card-3 front\",\"back\":\"Card-3 back\"}"
-  },
-  {
-    "pkey": "Stack-All",
+    "data": "My deck",
     "skey": "UserId:DummyUser#Stack",
-    "data": "A good stack"
+    "pkey": "Stack-1e4ad445-43bd-4ef0-ac57-249bd220684c"
   }
 ]
