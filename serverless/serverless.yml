@@ -52,8 +52,9 @@ functions:
           method: get
           path: cards/{cardId}
           request:
-            path:
-              cardId: true
+            parameters:
+              path:
+                cardId: true
 
   getCardsByUserId:
     handler: lambda/getCardsByUserId.handler
@@ -62,8 +63,9 @@ functions:
           method: get
           path: user/{userId}/cards
           request:
-            path:
-              userId: true
+            parameters:
+              path:
+                userId: true
 
   createStack:
     handler: lambda/createStack.handler
