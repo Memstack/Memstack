@@ -7,13 +7,17 @@ import { getLogger } from "./logger";
 import { success } from "./response";
 import { normaliseStackId } from "./uuid";
 
-const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
-  queryResult.map(item => ({
-    id: normaliseStackId(item.pkey),
-    title: item.data,
-    description: item.description,
-    image: item.image
-  }));
+const mapToStacksList = (queryResult: DynamoStack[]): Stack[] =>
+  queryResult.map(item => {
+    const id = normaliseStackId(item.pkey);
+    return {
+      id,
+      title: item.data,
+      description: item.description,
+      image: item.image,
+      href: `/stacks/${id}`
+    };
+  });
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
@@ -37,6 +41,6 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   log.info({ count: result.Count }, "Found stack");
 
   return success({
-    items: mapToResponse(result.Items as DynamoStack[])
+    items: mapToStacksList(result.Items as DynamoStack[])
   });
 };
