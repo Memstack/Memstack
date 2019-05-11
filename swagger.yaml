@@ -109,8 +109,11 @@ components:
         - type: object
           required:
             - id
+            - href
           properties:
             id:
+              type: string
+            href:
               type: string
 
     Stack:
@@ -119,8 +122,16 @@ components:
         title:
           type: string
           example: "This is a stack"
+        description:
+          type: string
+          example: "This is a deck I created in Memstack"
+        image:
+          type: string
+          example: "https://example.com/image.jpg"
       required:
         - title
+        - description
+        - image
 
     StackWithId:
       allOf: # Combines the Stack and the inline model

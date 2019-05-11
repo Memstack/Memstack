@@ -7,7 +7,7 @@ import { getLogger } from "./logger";
 import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
 import { IncomingStack, incomingStackSchema } from "../../schema";
-import { mapStackToItem } from "./dynamo/stack";
+import { mapStackToItem, mapItemToStack } from "./dynamo/stack";
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
@@ -35,12 +35,14 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   log.info({ stackId: id }, "Creating new stack");
 
+  const item = mapStackToItem({ id, ...stack });
+
   const params = {
     TableName: tableName,
-    Item: mapStackToItem({ id, ...stack })
+    Item: item
   };
 
   await documentClient.put(params).promise();
 
-  return created({ ...stack, id });
+  return created(mapItemToStack(item));
 };

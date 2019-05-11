@@ -7,7 +7,7 @@ import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
-import { mapCardToItem } from "./dynamo/card";
+import { mapCardToItem, mapItemToCard } from "./dynamo/card";
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
@@ -33,12 +33,14 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const id = uuid();
 
+  const item = mapCardToItem({ id, ...card });
+
   const params = {
     TableName: tableName,
-    Item: mapCardToItem({ id, ...card })
+    Item: item
   };
 
   await documentClient.put(params).promise();
 
-  return created({ ...card, id });
+  return created(mapItemToCard(item));
 };
