@@ -1,5 +1,6 @@
 import { agent } from "supertest";
 import { uuidRegex } from "./utils/uuid";
+import { getEndpoint } from "./tests/setup";
 
 describe("POST /cards", () => {
   it("it responds 201 when a card is created", async () => {
@@ -8,7 +9,7 @@ describe("POST /cards", () => {
     const back = "Back";
 
     // Act/Assert
-    const res = await agent("http://localhost:3000")
+    const res = await agent(getEndpoint())
       .post("/cards")
       .send({ front, back })
       .expect(201);

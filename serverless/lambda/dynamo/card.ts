@@ -3,6 +3,8 @@ import { DynamoCard } from "./schema";
 import { Card, IncomingCard } from "../../../schema";
 import { Id } from ".";
 
+const cardHref = (id: string) => `/cards/${id}`;
+
 /**
  * Convert a DynamoCard to a Card
  */
@@ -13,6 +15,7 @@ export const mapItemToCard = ({ pkey, data }: DynamoCard): Card => {
 
   return {
     id,
+    href: cardHref(id),
     front,
     back
   };

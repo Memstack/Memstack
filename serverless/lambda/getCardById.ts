@@ -1,22 +1,20 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import * as yup from "yup";
-
-import { mapToCardsList } from "./dynamo/card";
-import { DynamoCard, DynamoStack } from "./dynamo/schema";
-import { mapItemToStack } from "./dynamo/stack";
-import { getLogger } from "./utils/logger";
-import { clientError, notFound, success } from "./utils/response";
-import { denormaliseStackId } from "./utils/uuid";
+import { mapItemToCard } from "./dynamo/card";
 import { getDynamoClient } from "./dynamo/client";
 import { getEnv } from "./dynamo/getEnv";
+import { DynamoCard } from "./dynamo/schema";
+import { getLogger } from "./utils/logger";
+import { clientError, notFound, success } from "./utils/response";
+import { denormaliseCardId } from "./utils/uuid";
 
-interface GetStackByIdParams {
-  stackId: string;
+interface GetCardByIdParams {
+  cardId: string;
 }
 
-const getStackByIdParamsSchema = yup.object<GetStackByIdParams>({
-  stackId: yup.string().required()
+const getCardByIdParamsSchema = yup.object<GetCardByIdParams>({
+  cardId: yup.string().required()
 });
 
 const tableName = getEnv("TABLE_NAME");
@@ -25,12 +23,10 @@ const documentClient = getDynamoClient();
 const log = getLogger({ name: "getCardById" });
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  let stackId: string;
+  let cardId: string;
 
   try {
-    ({ stackId } = await getStackByIdParamsSchema.validate(
-      event.pathParameters
-    ));
+    ({ cardId } = await getCardByIdParamsSchema.validate(event.pathParameters));
   } catch (err) {
     return clientError({ error: "Missing stack ID parameter" });
   }
@@ -39,45 +35,20 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const getStackParams: DocumentClient.GetItemInput = {
     TableName: tableName,
     Key: {
-      pkey: denormaliseStackId(stackId),
-      skey: "UserId:DummyUser#Stack"
+      pkey: denormaliseCardId(cardId),
+      skey: "UserId:DummyUser#StackId:Stack-All"
     }
   };
 
   const stackResult = await documentClient.get(getStackParams).promise();
 
-  const stack = stackResult.Item as DynamoStack;
+  const card = stackResult.Item as DynamoCard;
 
-  if (!stack) {
-    return notFound({ error: "Could not find the specified stack" });
+  if (!card) {
+    return notFound({ error: "Could not find the specified card" });
   }
 
-  log.info({ stack });
+  log.debug({ cardId }, "Found card");
 
-  const cardsAvl = `UserId:DummyUser#StackId:${stackId}`;
-
-  log.info({ cardsAvl }, "Fetching cards using skey EQ query");
-
-  // Query Dynamo for cards in stack
-  const getCardsInStackParams: DocumentClient.QueryInput = {
-    TableName: tableName,
-    KeyConditions: {
-      skey: {
-        ComparisonOperator: "EQ",
-        AttributeValueList: [cardsAvl]
-      }
-    },
-    IndexName: "SkeyData"
-  };
-
-  const cardsResult = await documentClient
-    .query(getCardsInStackParams)
-    .promise();
-
-  log.info({ cardsResult });
-
-  return success({
-    ...mapItemToStack(stack),
-    cards: mapToCardsList(cardsResult.Items as DynamoCard[])
-  });
+  return success(mapItemToCard(card));
 };

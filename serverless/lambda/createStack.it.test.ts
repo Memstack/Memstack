@@ -1,5 +1,6 @@
 import { agent } from "supertest";
 import { uuidRegex } from "./utils/uuid";
+import { getEndpoint } from "./tests/setup";
 
 describe("POST /stacks", () => {
   it("it responds 201 when a stack is created", async () => {
@@ -7,7 +8,7 @@ describe("POST /stacks", () => {
     const title = "test-stack";
 
     // Act/Assert
-    const res = await agent("http://localhost:3000")
+    const res = await agent(getEndpoint())
       .post("/stacks")
       .send({ title })
       .expect(201);

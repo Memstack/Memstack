@@ -1,4 +1,5 @@
 import { agent } from "supertest";
+import { getEndpoint } from "./tests/setup";
 
 describe("GET /user/{userId}/cards", () => {
   it("it responds 200 with a list of cards", async () => {
@@ -7,17 +8,16 @@ describe("GET /user/{userId}/cards", () => {
     const back = "Back";
 
     // Create stack
-    // TODO: Create directly instead of via API?
-    const card1 = await agent("http://localhost:3000")
+    const card1 = await agent(getEndpoint())
       .post("/cards")
       .send({ front, back });
 
-    const card2 = await agent("http://localhost:3000")
+    const card2 = await agent(getEndpoint())
       .post("/cards")
       .send({ front, back });
 
     // Act/Assert
-    const res = await agent("http://localhost:3000")
+    const res = await agent(getEndpoint())
       .get("/user/47985f6b-436d-468e-a8ff-82936d61d1ea/cards")
       .expect(200);
 

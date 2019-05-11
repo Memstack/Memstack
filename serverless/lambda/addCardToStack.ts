@@ -78,6 +78,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     });
   }
 
+  // TODO: Validate stack ID exists before adding card to it
   const newItem: DynamoCard = {
     pkey: cardId,
     skey: `UserId:DummyUser#StackId:${cardDetails.stackId}`,
@@ -88,6 +89,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     TableName: tableName,
     Item: newItem
   };
+
   await documentClient.put(params).promise();
 
   return created();

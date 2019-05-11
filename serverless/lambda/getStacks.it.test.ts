@@ -1,4 +1,5 @@
 import { agent } from "supertest";
+import { getEndpoint } from "./tests/setup";
 
 describe("GET /stacks", () => {
   it("it responds 200 with a list of stacks", async () => {
@@ -8,16 +9,16 @@ describe("GET /stacks", () => {
 
     // Create stack
     // TODO: Create directly instead of via API?
-    const stack1 = await agent("http://localhost:3000")
+    const stack1 = await agent(getEndpoint())
       .post("/stacks")
       .send({ title: title1 });
 
-    const stack2 = await agent("http://localhost:3000")
+    const stack2 = await agent(getEndpoint())
       .post("/stacks")
       .send({ title: title2 });
 
     // Act/Assert
-    const res = await agent("http://localhost:3000")
+    const res = await agent(getEndpoint())
       .get("/stacks")
       .expect(200);
 

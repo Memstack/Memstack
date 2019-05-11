@@ -3,6 +3,8 @@ import { Stack, IncomingStack } from "../../../schema";
 import { DynamoStack } from "./schema";
 import { Id } from ".";
 
+const stackHref = (id: string) => `/stacks/${id}`;
+
 /**
  * Convert a DynamoStack to a Stack
  */
@@ -19,7 +21,7 @@ export const mapItemToStack = ({
     title: data,
     description: description,
     image: image,
-    href: `/stacks/${id}`
+    href: stackHref(id)
   };
 };
 
