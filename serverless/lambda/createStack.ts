@@ -6,14 +6,8 @@ import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
-
-interface IncomingStack {
-  title: string;
-}
-
-const incomingStackSchema = yup.object<IncomingStack>({
-  title: yup.string().required()
-});
+import { IncomingStack, incomingStackSchema } from "../../schema";
+import { mapStackToItem } from "./dynamo/stack";
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
@@ -43,11 +37,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const params = {
     TableName: tableName,
-    Item: {
-      pkey: `Stack-${id}`,
-      skey: "UserId:DummyUser#Stack",
-      data: stack.title
-    }
+    Item: mapStackToItem({ id, ...stack })
   };
 
   await documentClient.put(params).promise();

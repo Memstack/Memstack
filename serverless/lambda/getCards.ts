@@ -2,22 +2,12 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
 import * as yup from "yup";
-import { Card, DynamoCard } from "../schema/types";
 import { getDynamoClient, getEnv } from "./client";
+import { mapToCardsList } from "./dynamo/card";
+import { DynamoCard } from "./dynamo/schema";
 import { getLogger } from "./logger";
 import { clientError, success } from "./response";
-import { normaliseCardId, uuidRegex } from "./uuid";
-
-export const mapToCardsList = (queryResult: DynamoCard[]): Card[] =>
-  queryResult.map(item => {
-    const { front, back } = JSON.parse(item.data);
-
-    return {
-      id: normaliseCardId(item.pkey),
-      front: front,
-      back: back
-    };
-  });
+import { uuidRegex } from "./uuid";
 
 interface UserId {
   userId: string;

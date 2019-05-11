@@ -1,14 +1,11 @@
 import * as yup from "yup";
 
+// Base item
 export interface DynamoItem {
   pkey: string;
   skey: string;
   data: string;
 }
-
-export type DynamoCard = DynamoItem;
-
-export type DynamoStack = DynamoItem;
 
 export const dynamoItemSchema = yup.object<DynamoItem>({
   pkey: yup.string().required(),
@@ -16,15 +13,14 @@ export const dynamoItemSchema = yup.object<DynamoItem>({
   data: yup.string().required()
 });
 
-export interface Stack {
-  id: string;
-  title: string;
+// Stack
+export interface DynamoStack extends DynamoItem {
   description: string;
-  img: string;
+  image: string;
 }
 
-export interface Card {
-  id: string;
-  front: string;
-  back: string;
-}
+// Card
+export type DynamoCard = DynamoItem;
+
+// TODO: Add JSON parse for data to validate?
+export const dynamoCardSchema = dynamoItemSchema;

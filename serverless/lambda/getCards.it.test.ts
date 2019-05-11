@@ -1,6 +1,6 @@
 import { agent } from "supertest";
 
-describe("GET /stacks", () => {
+describe("GET /cards", () => {
   it("it responds 200 with a list of cards", async () => {
     // Arrange
     const front = "Front";

@@ -1,44 +1,34 @@
 import * as yup from "yup";
-import { dynamoItemSchema } from "../serverless/schema/types";
 
-export interface DynamoCard extends DyanmoItem {
-  front: string;
-  back: string;
+// Stack
+
+export interface IncomingStack {
+  title: string;
 }
 
-export interface DyanmoItem {
-  pkey: string;
-  skey: string;
-  data: string;
-}
-
-// No additional attributes on DynamoStack currently
-export interface DynamoStack extends DyanmoItem {
-  description: string;
-  image: string;
-}
-
-interface CardFrontBack {
-  front: string;
-  back: string;
-}
-
-export const cardDataSchema = yup.object<CardFrontBack>({
-  front: yup.string().required(),
-  back: yup.string().required()
-});
-
-// TODO: Add JSON parse for data to validate?
-export const dynamoCardSchema = dynamoItemSchema;
-
-export interface Stack {
+export interface Stack extends IncomingStack {
   id: string;
+  href: string;
   title: string;
   description: string;
   image: string;
 }
-export interface Card {
-  id: string;
+
+export const incomingStackSchema = yup.object<IncomingStack>({
+  title: yup.string().required()
+});
+
+// Card
+export interface IncomingCard {
   front: string;
   back: string;
 }
+
+export interface Card extends IncomingCard {
+  id: string;
+}
+
+export const incomingCardSchema = yup.object<IncomingCard>({
+  front: yup.string().required(),
+  back: yup.string().required()
+});

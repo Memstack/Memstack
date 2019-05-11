@@ -1,23 +1,11 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
-import { DynamoStack, Stack } from "../../schema";
 import { getDynamoClient, getEnv } from "./client";
+import { DynamoStack } from "./dynamo/schema";
+import { mapToStacksList } from "./dynamo/stack";
 import { getLogger } from "./logger";
 import { success } from "./response";
-import { normaliseStackId } from "./uuid";
-
-const mapToStacksList = (queryResult: DynamoStack[]): Stack[] =>
-  queryResult.map(item => {
-    const id = normaliseStackId(item.pkey);
-    return {
-      id,
-      title: item.data,
-      description: item.description,
-      image: item.image,
-      href: `/stacks/${id}`
-    };
-  });
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();

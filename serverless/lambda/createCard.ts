@@ -2,20 +2,12 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
 import * as yup from "yup";
+import { IncomingCard, incomingCardSchema } from "../../schema";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
 import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
-
-interface IncomingCard {
-  front: string;
-  back: string;
-}
-
-const incomingCardSchema = yup.object<IncomingCard>({
-  front: yup.string().required(),
-  back: yup.string().required()
-});
+import { mapCardToItem } from "./dynamo/card";
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
@@ -43,11 +35,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const params = {
     TableName: tableName,
-    Item: {
-      pkey: `Card-${id}`,
-      skey: "UserId:DummyUser#StackId:Stack-All",
-      data: JSON.stringify({ front: card.front, back: card.back })
-    }
+    Item: mapCardToItem({ id, ...card })
   };
 
   await documentClient.put(params).promise();

@@ -1,11 +1,12 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import * as yup from "yup";
-import { DynamoCard, DynamoStack } from "../schema/types";
 import { getDynamoClient, getEnv } from "./client";
-import { mapToCardsList } from "./getCards";
+import { mapToCardsList } from "./dynamo/card";
+import { DynamoCard, DynamoStack } from "./dynamo/schema";
+import { mapItemToStack } from "./dynamo/stack";
 import { getLogger } from "./logger";
-import { clientError, success, notFound } from "./response";
+import { clientError, notFound, success } from "./response";
 import { denormaliseStackId } from "./uuid";
 
 interface GetStackByIdParams {
@@ -43,13 +44,13 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
   const stackResult = await documentClient.get(getStackParams).promise();
 
-  const item = stackResult.Item as DynamoStack;
+  const stack = stackResult.Item as DynamoStack;
 
-  if (!item) {
+  if (!stack) {
     return notFound({ error: "Could not find the specified stack" });
   }
 
-  log.info({ item });
+  log.info({ stack });
 
   const cardsAvl = `UserId:DummyUser#StackId:${stackId}`;
 
@@ -74,8 +75,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   log.info({ cardsResult });
 
   return success({
-    id: stackId,
-    title: item.data,
+    ...mapItemToStack(stack),
     cards: mapToCardsList(cardsResult.Items as DynamoCard[])
   });
 };

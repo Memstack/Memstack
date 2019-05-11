@@ -17,11 +17,15 @@
   {
     "data": "My best stack",
     "skey": "UserId:DummyUser#Stack",
-    "pkey": "Stack-1e4ad445-43bd-4ef0-ac57-249bd220684c"
+    "pkey": "Stack-1e4ad445-43bd-4ef0-ac57-249bd220684c",
+    "image": "http://example.com/image.jpg",
+    "description": "A stack I created myself"
   },
   {
     "data": "My 'all' stack",
     "skey": "UserId:DummyUser#Stack",
-    "pkey": "Stack-3da38752-ffe0-4ab1-8703-759bbca8793c"
+    "pkey": "Stack-3da38752-ffe0-4ab1-8703-759bbca8793c",
+    "image": "http://example.com/image.jpg",
+    "description": "A containing all of your cards"
   }
 ]
