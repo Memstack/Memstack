@@ -6,12 +6,22 @@
   },
   {
     "data": "{\"front\":\"Yeah\",\"back\":\"Hell\"}",
-    "skey": "UserId:DummyUser#StackId:Stack-All",
+    "skey": "UserId:DummyUser#StackId:3da38752-ffe0-4ab1-8703-759bbca8793c",
     "pkey": "Card-d7c3ceb6-c70d-4533-a136-a41009cb11bc"
   },
   {
-    "data": "My deck",
+    "data": "{\"front\":\"This is a card\",\"back\":\"This is the back\"}",
+    "skey": "UserId:DummyUser#StackId:3da38752-ffe0-4ab1-8703-759bbca8793c",
+    "pkey": "Card-dbf2e164-095a-4e9b-8997-9c179c35bf53"
+  },
+  {
+    "data": "My best stack",
     "skey": "UserId:DummyUser#Stack",
     "pkey": "Stack-1e4ad445-43bd-4ef0-ac57-249bd220684c"
+  },
+  {
+    "data": "My 'all' stack",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-3da38752-ffe0-4ab1-8703-759bbca8793c"
   }
 ]
