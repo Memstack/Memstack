@@ -14,7 +14,7 @@ servers:
 paths:
   /cards:
     post:
-      summary: Add a card
+      summary: Create a card
       requestBody:
         content:
           application/json:
@@ -23,25 +23,38 @@ paths:
       responses:
         201:
           description: Created Card
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CardWithId"
 
   /stacks:
     post:
-      summary: Add a stacks
+      summary: Create a stack
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Stack"
-
       responses:
         201:
           description: Created Stack
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StackWithId"
 
     get:
       summary: Gets all stacks
       responses:
         200:
           description: List of Cards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StackWithId"
 
   /stacks/{stackId}:
     get:
@@ -90,11 +103,22 @@ components:
         - front
         - back
 
+    CardWithId:
+      allOf: # Combines the Card and the inline model
+        - $ref: "#/components/schemas/Card"
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+
     Stack:
       type: object
       properties:
         title:
           type: string
+          example: "This is a stack"
       required:
         - title
 
@@ -104,6 +128,11 @@ components:
         - type: object
           required:
             - id
+            - href
           properties:
             id:
               type: string
+              example: "3da38752-ffe0-4ab1-8703-759bbca8793c"
+            href:
+              type: string
+              example: "/stacks/3da38752-ffe0-4ab1-8703-759bbca8793c"
