@@ -1,11 +1,12 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import * as yup from "yup";
-import { dynamoCardSchema } from "../../schema";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
-import { clientError, created, serverError, notFound } from "./response";
-import { uuidRegex, denormaliseCardId } from "./uuid";
+import { clientError, created, notFound, serverError } from "./response";
+import { denormaliseCardId, uuidRegex } from "./uuid";
+import { dynamoCardSchema } from "../../schema";
+import { DynamoCard } from "../schema/types";
 
 interface CardToAdd {
   stackId: string;
@@ -25,27 +26,18 @@ const cardToAddSchema = yup.object<CardToAdd>({
     .matches(uuidRegex, uuidErrorMessage)
 });
 
+const tableName = getEnv("TABLE_NAME");
+const documentClient = getDynamoClient();
+
+const log = getLogger({ name: "addCardToStack" });
+
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  const log = getLogger({ name: "addCardToStack" });
-
-  let tableName;
-  try {
-    tableName = getEnv("TABLE_NAME");
-
-    log.info({ tableName }, "Table name is set");
-  } catch (err) {
-    log.error({ err });
-    return serverError({ error: "TABLE_NAME not set" });
-  }
-
   let cardDetails;
   try {
     cardDetails = await cardToAddSchema.validate(event.pathParameters);
   } catch (err) {
     return clientError({ error: (err as yup.ValidationError).message });
   }
-
-  const documentClient = getDynamoClient();
 
   const cardId = denormaliseCardId(cardDetails.cardId);
 
@@ -73,7 +65,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return notFound({ error: "The specified card was not found" });
   }
 
-  let card;
+  let card: DynamoCard;
   try {
     card = await dynamoCardSchema.validate(dynamoResponse.Item);
   } catch (err) {
@@ -86,14 +78,15 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     });
   }
 
+  const newItem: DynamoCard = {
+    pkey: cardId,
+    skey: `UserId:DummyUser#StackId:${cardDetails.stackId}`,
+    data: card.data
+  };
+
   const params = {
     TableName: tableName,
-    Item: {
-      pkey: cardDetails.cardId,
-      skey: `UserId:DummyUser#StackId:${cardDetails.stackId}`,
-      front: card.front,
-      back: card.back
-    }
+    Item: newItem
   };
   await documentClient.put(params).promise();
 

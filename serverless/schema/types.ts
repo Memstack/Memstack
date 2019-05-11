@@ -1,24 +1,19 @@
 import * as yup from "yup";
 
-export interface DynamoCard extends DyanmoItem {
-  front: string;
-  back: string;
-}
-
-export interface DyanmoItem {
+export interface DynamoItem {
   pkey: string;
   skey: string;
   data: string;
 }
 
-// No additional attributes on DynamoStack currently
-export type DynamoStack = DyanmoItem;
+export type DynamoCard = DynamoItem;
 
-export const dynamoCardSchema = yup.object({
+export type DynamoStack = DynamoItem;
+
+export const dynamoItemSchema = yup.object<DynamoItem>({
   pkey: yup.string().required(),
   skey: yup.string().required(),
-  front: yup.string().required(),
-  back: yup.string().required()
+  data: yup.string().required()
 });
 
 export interface Stack {

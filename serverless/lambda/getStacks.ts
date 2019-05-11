@@ -4,7 +4,7 @@ import "source-map-support/register";
 import { DynamoStack, Stack } from "../../schema";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
-import { serverError, success } from "./response";
+import { success } from "./response";
 import { normaliseStackId } from "./uuid";
 
 const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
@@ -15,19 +15,12 @@ const mapToResponse = (queryResult: DynamoStack[]): Stack[] =>
     image: item.image
   }));
 
+const tableName = getEnv("TABLE_NAME");
+const documentClient = getDynamoClient();
+
+const log = getLogger({ name: "createStack" });
+
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
-  const log = getLogger({ name: "createStack" });
-
-  let tableName;
-  try {
-    tableName = getEnv("TABLE_NAME");
-  } catch (err) {
-    log.error({ err });
-    return serverError({ error: "TABLE_NAME not set" });
-  }
-
-  const documentClient = getDynamoClient();
-
   const params: DocumentClient.QueryInput = {
     TableName: tableName,
     KeyConditions: {
@@ -40,6 +33,9 @@ export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   };
 
   const result = await documentClient.query(params).promise();
+
+  log.info({ count: result.Count }, "Found stack");
+
   return success({
     items: mapToResponse(result.Items as DynamoStack[])
   });

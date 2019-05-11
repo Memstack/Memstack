@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import * as yup from "yup";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
-import { clientError, created, serverError } from "./response";
+import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
 
 interface IncomingStack {
@@ -15,17 +15,12 @@ const incomingStackSchema = yup.object<IncomingStack>({
   title: yup.string().required()
 });
 
+const tableName = getEnv("TABLE_NAME");
+const documentClient = getDynamoClient();
+
+const log = getLogger({ name: "createStack" });
+
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  const log = getLogger({ name: "createStack" });
-
-  let tableName;
-  try {
-    tableName = getEnv("TABLE_NAME");
-  } catch (err) {
-    log.error({ err });
-    return serverError({ error: "TABLE_NAME not set" });
-  }
-
   if (!event.body) {
     return clientError({ error: "No event body" });
   }
@@ -41,8 +36,6 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 
     return clientError({ error: message });
   }
-
-  const documentClient = getDynamoClient();
 
   const id = uuid();
 

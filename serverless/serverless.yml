@@ -44,7 +44,7 @@ functions:
       - http:
           method: post
           path: cards
-          cors: true
+
   getCardsByUser:
     handler: lambda/getCards.handler
     events:
@@ -54,13 +54,13 @@ functions:
           request:
             path:
               userId: true
+
   createStack:
     handler: lambda/createStack.handler
     events:
       - http:
           method: post
           path: stacks
-          cors: true
 
   getStacks:
     handler: lambda/getStacks.handler
@@ -68,7 +68,17 @@ functions:
       - http:
           method: get
           path: stacks
-          cors: true
+
+  getStackById:
+    handler: lambda/getStackById.handler
+    events:
+      - http:
+          method: get
+          path: stacks/{stackId}
+          request:
+            parameters:
+              path:
+                stackId: true
 
   addCardToStack:
     handler: lambda/addCardToStack.handler
@@ -79,9 +89,8 @@ functions:
           request:
             parameters:
               path:
-                stackid: true
-                cardid: true
-          cors: true
+                stackId: true
+                cardId: true
 
 resources:
   - ${file(resources/api-gateway.yml)}

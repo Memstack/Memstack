@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import * as yup from "yup";
 import { getDynamoClient, getEnv } from "./client";
 import { getLogger } from "./logger";
-import { clientError, created, serverError } from "./response";
+import { clientError, created } from "./response";
 import { defaultValidationOptions } from "./validation";
 
 interface IncomingCard {
@@ -17,17 +17,12 @@ const incomingCardSchema = yup.object<IncomingCard>({
   back: yup.string().required()
 });
 
+const tableName = getEnv("TABLE_NAME");
+const documentClient = getDynamoClient();
+
+const log = getLogger({ name: "createCard" });
+
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  const log = getLogger({ name: "createCard" });
-
-  let tableName;
-  try {
-    tableName = getEnv("TABLE_NAME");
-  } catch (err) {
-    log.error({ err });
-    return serverError({ error: "TABLE_NAME not set" });
-  }
-
   if (!event.body) {
     return clientError({ error: "No event body" });
   }
@@ -44,8 +39,6 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return clientError({ error: message });
   }
 
-  const documentClient = getDynamoClient();
-
   const id = uuid();
 
   const params = {
@@ -53,9 +46,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     Item: {
       pkey: `Card-${id}`,
       skey: "UserId:DummyUser#StackId:Stack-All",
-      front: card.front,
-      back: card.back,
-      data: "0"
+      data: JSON.stringify({ front: card.front, back: card.back })
     }
   };
 

@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { dynamoItemSchema } from "../serverless/schema/types";
 
 export interface DynamoCard extends DyanmoItem {
   front: string;
@@ -15,14 +16,20 @@ export interface DyanmoItem {
 export interface DynamoStack extends DyanmoItem {
   description: string;
   image: string;
-};
+}
 
-export const dynamoCardSchema = yup.object({
-  pkey: yup.string().required(),
-  skey: yup.string().required(),
+interface CardFrontBack {
+  front: string;
+  back: string;
+}
+
+export const cardDataSchema = yup.object<CardFrontBack>({
   front: yup.string().required(),
   back: yup.string().required()
 });
+
+// TODO: Add JSON parse for data to validate?
+export const dynamoCardSchema = dynamoItemSchema;
 
 export interface Stack {
   id: string;
