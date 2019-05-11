@@ -69,6 +69,10 @@ paths:
       responses:
         200:
           description: Got stack
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StackWithId"
 
   /stacks/{stackId}/cards/{cardId}:
     post:
@@ -97,8 +101,10 @@ components:
       properties:
         front:
           type: string
+          example: "Front of card"
         back:
           type: string
+          example: "Back of card"
       required:
         - front
         - back
@@ -113,8 +119,10 @@ components:
           properties:
             id:
               type: string
+              example: "d7c3ceb6-c70d-4533-a136-a41009cb11bc"
             href:
               type: string
+              example: "/cards/d7c3ceb6-c70d-4533-a136-a41009cb11bc"
 
     Stack:
       type: object
