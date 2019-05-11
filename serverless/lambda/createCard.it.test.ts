@@ -1,5 +1,5 @@
 import { agent } from "supertest";
-import { uuidRegex } from "./uuid";
+import { uuidRegex } from "./utils/uuid";
 
 describe("POST /cards", () => {
   it("it responds 201 when a card is created", async () => {

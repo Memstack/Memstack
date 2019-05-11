@@ -1,12 +1,12 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import * as yup from "yup";
-import { getDynamoClient, getEnv } from "./client";
-import { getLogger } from "./logger";
-import { clientError, created, notFound, serverError } from "./response";
-import { denormaliseCardId, uuidRegex } from "./uuid";
-import { dynamoCardSchema } from "../../schema";
-import { DynamoCard } from "../schema/types";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
+import { getLogger } from "./utils/logger";
+import { clientError, created, notFound, serverError } from "./utils/response";
+import { denormaliseCardId, uuidRegex } from "./utils/uuid";
+import { DynamoCard, dynamoCardSchema } from "./dynamo/schema";
 
 interface CardToAdd {
   stackId: string;

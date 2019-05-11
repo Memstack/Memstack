@@ -1,4 +1,4 @@
-import { normaliseCardId, denormaliseCardId } from "../uuid";
+import { normaliseCardId, denormaliseCardId } from "../utils/uuid";
 import { DynamoCard } from "./schema";
 import { Card, IncomingCard } from "../../../schema";
 import { Id } from ".";

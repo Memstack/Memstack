@@ -2,10 +2,11 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import "source-map-support/register";
 import { v4 as uuid } from "uuid";
 import * as yup from "yup";
-import { getDynamoClient, getEnv } from "./client";
-import { getLogger } from "./logger";
-import { clientError, created } from "./response";
-import { defaultValidationOptions } from "./validation";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
+import { getLogger } from "./utils/logger";
+import { clientError, created } from "./utils/response";
+import { defaultValidationOptions } from "./utils/validation";
 import { IncomingStack, incomingStackSchema } from "../../schema";
 import { mapStackToItem, mapItemToStack } from "./dynamo/stack";
 

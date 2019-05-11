@@ -1,5 +1,5 @@
 import { agent } from "supertest";
-import { uuidRegex } from "./uuid";
+import { uuidRegex } from "./utils/uuid";
 
 describe("POST /stacks", () => {
   it("it responds 201 when a stack is created", async () => {

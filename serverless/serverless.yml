@@ -45,6 +45,16 @@ functions:
           method: post
           path: cards
 
+  getCardById:
+    handler: lambda/getCardById.handler
+    events:
+      - http:
+          method: get
+          path: cards/{cardId}
+          request:
+            path:
+              cardId: true
+
   getCardsByUserId:
     handler: lambda/getCardsByUserId.handler
     events:

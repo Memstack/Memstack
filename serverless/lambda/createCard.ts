@@ -3,10 +3,11 @@ import "source-map-support/register";
 import { v4 as uuid } from "uuid";
 import * as yup from "yup";
 import { IncomingCard, incomingCardSchema } from "../../schema";
-import { getDynamoClient, getEnv } from "./client";
-import { getLogger } from "./logger";
-import { clientError, created } from "./response";
-import { defaultValidationOptions } from "./validation";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
+import { getLogger } from "./utils/logger";
+import { clientError, created } from "./utils/response";
+import { defaultValidationOptions } from "./utils/validation";
 import { mapCardToItem, mapItemToCard } from "./dynamo/card";
 
 const tableName = getEnv("TABLE_NAME");

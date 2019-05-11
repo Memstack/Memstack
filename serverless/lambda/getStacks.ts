@@ -1,16 +1,17 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
-import { getDynamoClient, getEnv } from "./client";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
 import { DynamoStack } from "./dynamo/schema";
 import { mapToStacksList } from "./dynamo/stack";
-import { getLogger } from "./logger";
-import { success } from "./response";
+import { getLogger } from "./utils/logger";
+import { success } from "./utils/response";
 
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
 
-const log = getLogger({ name: "createStack" });
+const log = getLogger({ name: "getStacks" });
 
 export const handler: APIGatewayProxyHandler = async (_event, _context) => {
   const params: DocumentClient.QueryInput = {

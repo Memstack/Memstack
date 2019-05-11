@@ -1,4 +1,4 @@
-import { normaliseStackId, denormaliseStackId } from "../uuid";
+import { normaliseStackId, denormaliseStackId } from "../utils/uuid";
 import { Stack, IncomingStack } from "../../../schema";
 import { DynamoStack } from "./schema";
 import { Id } from ".";

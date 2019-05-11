@@ -2,12 +2,13 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import "source-map-support/register";
 import * as yup from "yup";
-import { getDynamoClient, getEnv } from "./client";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
 import { mapToCardsList } from "./dynamo/card";
 import { DynamoCard } from "./dynamo/schema";
-import { getLogger } from "./logger";
-import { clientError, success } from "./response";
-import { uuidRegex } from "./uuid";
+import { getLogger } from "./utils/logger";
+import { clientError, success } from "./utils/response";
+import { uuidRegex } from "./utils/uuid";
 
 interface UserId {
   userId: string;
@@ -25,7 +26,7 @@ const userIdValidator = yup.object<UserId>({
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
 
-const log = getLogger({ name: "getCards" });
+const log = getLogger({ name: "getCardsByUserId" });
 
 //TODO: update this to use userId once we have auth set up
 export const handler: APIGatewayProxyHandler = async (event, _context) => {

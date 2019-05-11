@@ -1,14 +1,15 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import * as yup from "yup";
-import { getDynamoClient } from "./dynamo/client";
-import { getEnv } from "./dynamo/getEnv";
+
 import { mapToCardsList } from "./dynamo/card";
 import { DynamoCard, DynamoStack } from "./dynamo/schema";
 import { mapItemToStack } from "./dynamo/stack";
 import { getLogger } from "./utils/logger";
 import { clientError, notFound, success } from "./utils/response";
 import { denormaliseStackId } from "./utils/uuid";
+import { getDynamoClient } from "./dynamo/client";
+import { getEnv } from "./dynamo/getEnv";
 
 interface GetStackByIdParams {
   stackId: string;
@@ -21,7 +22,7 @@ const getStackByIdParamsSchema = yup.object<GetStackByIdParams>({
 const tableName = getEnv("TABLE_NAME");
 const documentClient = getDynamoClient();
 
-const log = getLogger({ name: "getStackById" });
+const log = getLogger({ name: "getCardById" });
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
   let stackId: string;
