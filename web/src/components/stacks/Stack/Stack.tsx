@@ -17,7 +17,7 @@ const Stack: React.SFC<StackProps> = ({ img, name, meta, description, id }) => {
     <Link to={`/stacks/${id}`}>
       <div className="Stack">
         <div className="cover-image">
-          <img src={imgSrc} />
+          <img src={imgSrc} alt={`${name} cover`} />
         </div>
         <div className="info">
           <div className="stack-name">{name}</div>

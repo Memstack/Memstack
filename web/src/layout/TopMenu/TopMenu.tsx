@@ -36,7 +36,7 @@ class TopMenu extends React.Component<{}, ITopMenuState> {
           <div className="logo">
             <Link to="/">
               <div className="item">
-                <img src={Logo} />
+                <img src={Logo} alt="Memstack" />
               </div>
             </Link>
           </div>
