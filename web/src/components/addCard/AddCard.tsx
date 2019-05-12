@@ -53,7 +53,7 @@ const AddCard = () => (
         {({ values, handleSubmit }) => {
           return (
             <>
-              <div className="label">
+              <div className="title">
                 <h2>Add Card</h2>
                 <Divider />
               </div>
