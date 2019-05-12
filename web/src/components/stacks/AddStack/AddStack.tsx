@@ -3,7 +3,7 @@ import React from "react";
 import { Divider } from "semantic-ui-react";
 import * as Db from "../../../../../schema";
 import Button from "../../button/Button";
-import TextInput from "../../form/textinput/TextInput";
+import TextInput from "../../form/TextInput";
 import "./AddStack.scss";
 
 type AddStackFormValues = Db.IncomingStack & Db.GeneratedStack;

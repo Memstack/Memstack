@@ -3,7 +3,7 @@ import React from "react";
 import { Divider } from "semantic-ui-react";
 import Button from "../button/Button";
 import Select, { DropdownValue } from "../form/dropdown/Select";
-import TextAreaInput from "../form/textarea/TextAreaInput";
+import TextAreaInput from "../form/TextAreaInput";
 import "./AddCard.scss";
 
 const existingStacks = [
