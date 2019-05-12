@@ -35,81 +35,83 @@ const handleAddTag = (
 };
 
 const AddCard = () => (
-  <div className="add-card-form">
-    <Formik
-      initialValues={{ stack: "", front: "", back: "", tags: [] }}
-      validate={(values: AddCardFormValues) => {
-        let errors: any = {};
-        if (!values.stack) {
-          errors.stack = "Required";
-        }
-        return errors;
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false);
-      }}
-    >
-      {({ values, handleSubmit }) => {
-        return (
-          <>
-            <div className="label">
-              <h2>Add Card</h2>
-              <Divider />
-            </div>
-            <Field
-              name="front"
-              render={({ field, form }) => (
-                <TextAreaInput
-                  field={field}
-                  form={form}
-                  extra={{
-                    placeholder: "Write a question"
-                  }}
-                />
-              )}
-            />
-            <Field
-              name="back"
-              render={({ field, form }) => (
-                <TextAreaInput
-                  field={field}
-                  form={form}
-                  extra={{
-                    placeholder: "Write the answer"
-                  }}
-                />
-              )}
-            />
-            <Field
-              name="stack"
-              render={({ field, form }) => (
-                <Select
-                  placeholder="Choose a stack"
-                  options={existingStacks}
-                  field={field}
-                  form={form}
-                />
-              )}
-            />
-            <Field
-              name="tags"
-              render={({ field, form }) => (
-                <Select
-                  placeholder="Add tags"
-                  options={existingTags}
-                  field={field}
-                  form={form}
-                  handleAddItem={handleAddTag}
-                  allowAdditions
-                  multiple
-                />
-              )}
-            />
-            <Button text="Add Card" />
-          </>
-        );
-      }}
-    </Formik>
+  <div className="add-card">
+    <div className="add-card-form">
+      <Formik
+        initialValues={{ stack: "", front: "", back: "", tags: [] }}
+        validate={(values: AddCardFormValues) => {
+          let errors: any = {};
+          if (!values.stack) {
+            errors.stack = "Required";
+          }
+          return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(false);
+        }}
+      >
+        {({ values, handleSubmit }) => {
+          return (
+            <>
+              <div className="label">
+                <h2>Add Card</h2>
+                <Divider />
+              </div>
+              <Field
+                name="front"
+                render={({ field, form }) => (
+                  <TextAreaInput
+                    field={field}
+                    form={form}
+                    extra={{
+                      placeholder: "Write a question"
+                    }}
+                  />
+                )}
+              />
+              <Field
+                name="back"
+                render={({ field, form }) => (
+                  <TextAreaInput
+                    field={field}
+                    form={form}
+                    extra={{
+                      placeholder: "Write the answer"
+                    }}
+                  />
+                )}
+              />
+              <Field
+                name="stack"
+                render={({ field, form }) => (
+                  <Select
+                    placeholder="Choose a stack"
+                    options={existingStacks}
+                    field={field}
+                    form={form}
+                  />
+                )}
+              />
+              <Field
+                name="tags"
+                render={({ field, form }) => (
+                  <Select
+                    placeholder="Add tags"
+                    options={existingTags}
+                    field={field}
+                    form={form}
+                    handleAddItem={handleAddTag}
+                    allowAdditions
+                    multiple
+                  />
+                )}
+              />
+              <Button text="Add Card" />
+            </>
+          );
+        }}
+      </Formik>
+    </div>
   </div>
 );
 
