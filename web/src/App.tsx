@@ -4,6 +4,7 @@ import AllStacks from "./components/stacks/AllStacks";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AddCard from "./components/addCard/AddCard";
 import StackById from "./components/stackById/StackById";
+import AddStack from "./components/stacks/AddStack/AddStack";
 
 class App extends React.Component {
   public render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={AllStacks} />
             <Route path="/add-card" component={AddCard} />
+            <Route path="/add-stack" component={AddStack} />
             <Route path="/stacks/:id" component={StackById} />
           </Switch>
         </Layout>

@@ -30,7 +30,7 @@ const AllStacks = () => {
     <div className="AllStacks centered">
       <Schedule />
       <div className="stacks">
-        <Link to="/create-stack" className="new-stack">
+        <Link to="/add-stack" className="new-stack">
           <div className="text">
             Add Stack
             <i className="fas fa-plus" />
