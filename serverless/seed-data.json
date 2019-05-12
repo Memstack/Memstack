@@ -15,17 +15,52 @@
     "pkey": "Card-dbf2e164-095a-4e9b-8997-9c179c35bf53"
   },
   {
-    "data": "My best stack",
+    "data": "Mega All Card Stack",
     "skey": "UserId:DummyUser#Stack",
-    "pkey": "Stack-1e4ad445-43bd-4ef0-ac57-249bd220684c",
-    "image": "http://example.com/image.jpg",
-    "description": "A stack I created myself"
-  },
-  {
-    "data": "My 'all' stack",
-    "skey": "UserId:DummyUser#Stack",
-    "pkey": "Stack-3da38752-ffe0-4ab1-8703-759bbca8793c",
+    "pkey": "Stack-All",
     "image": "http://example.com/image.jpg",
     "description": "A containing all of your cards"
+  },
+  {
+    "data": "Mega All Card Stack",
+    "skey": "UserId:DummyUser-2#Stack",
+    "pkey": "Stack-All",
+    "image": "http://example.com/image.jpg",
+    "description": "A containing all of your cards"
+  },
+  {
+    "data": "Spanish",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-Spanish",
+    "image": "https://via.placeholder.com/300x150",
+    "description": "Useful words and phrases"
+  },
+  {
+    "data": "Italian",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-Italian",
+    "image": "https://via.placeholder.com/300x150",
+    "description": "Basic words and phrases"
+  },
+  {
+    "data": "Machine Learning",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-MachineLearning",
+    "image": "https://via.placeholder.com/300x150",
+    "description": "SVMs, Neural Networks and Random Forests"
+  },
+  {
+    "data": "Physics",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-Physics",
+    "image": "https://via.placeholder.com/300x150",
+    "description": "Revision cards for physics"
+  },
+  {
+    "data": "UX",
+    "skey": "UserId:DummyUser#Stack",
+    "pkey": "Stack-UX",
+    "image": "https://via.placeholder.com/300x150",
+    "description": "User experience 101"
   }
 ]
