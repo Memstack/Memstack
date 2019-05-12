@@ -11,7 +11,7 @@ export interface IncomingStack {
 }
 
 // Properties not yet created via the API
-interface GeneratedStack {
+export interface GeneratedStack {
   description: string;
   image: string;
 }
