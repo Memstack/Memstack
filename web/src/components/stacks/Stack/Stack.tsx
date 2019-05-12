@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Stack.scss";
+import defaultCoverImage from "../../../logo.png";
 
 interface StackProps {
   id: string;
@@ -11,11 +12,12 @@ interface StackProps {
 }
 
 const Stack: React.SFC<StackProps> = ({ img, name, meta, description, id }) => {
+  const imgSrc = img || defaultCoverImage;
   return (
     <Link to={`/stacks/${id}`}>
       <div className="Stack">
         <div className="cover-image">
-          <img src={img} />
+          <img src={imgSrc} />
         </div>
         <div className="info">
           <div className="stack-name">{name}</div>
