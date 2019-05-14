@@ -10,6 +10,7 @@ interface ButtonProps {
   secondary?: boolean;
   bold?: boolean;
   palette?: IPalette;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Button: React.SFC<ButtonProps> = ({
@@ -18,7 +19,8 @@ const Button: React.SFC<ButtonProps> = ({
   secondary,
   icon,
   bold,
-  palette
+  palette,
+  onClick
 }) => {
   const color = getColor(palette);
 
@@ -30,6 +32,7 @@ const Button: React.SFC<ButtonProps> = ({
           backgroundColor: secondary ? "white" : color,
           border: secondary ? `1px solid ${color}` : "none"
         }}
+        onClick={onClick ? onClick : () => null}
       >
         <span
           className={"text" + (bold ? " bold" : "")}
