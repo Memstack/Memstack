@@ -30,7 +30,11 @@
     }
 
     .Stack {
-      margin-top: 2rem;
+      margin-top: 3rem;
+
+      @include media-query(small) {
+        margin-top: 2rem;
+      }
     }
 
     .new-stack {
