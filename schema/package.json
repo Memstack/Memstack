@@ -6,8 +6,8 @@
   "repository": "https://github.com/Memstack/Memstack.git",
   "license": "MIT",
   "devDependencies": {
-    "@types/yup": "^0.26.12",
-    "typescript": "^3.2.4"
+    "@types/yup": "0.26.13",
+    "typescript": "3.4.5"
   },
   "dependencies": {
     "yup": "^0.27.0"
