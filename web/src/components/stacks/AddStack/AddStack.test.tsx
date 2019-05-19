@@ -4,7 +4,6 @@ import AddStack from "./AddStack";
 
 describe("AllStacks", () => {
   it("renders without crashing", () => {
-    shallow(<AddStacks />);
+    shallow(<AddStack />);
   });
 });
-
