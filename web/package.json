@@ -8,14 +8,14 @@
     "node-sass": "4.12.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-dropzone": "10.1.4",
     "react-helmet": "5.2.1",
     "react-palette": "0.1.3",
     "react-router-dom": "5.0.0",
     "react-scripts": "3.0.1",
     "semantic-ui-css": "2.4.1",
     "semantic-ui-react": "0.87.1",
-    "typescript": "3.4.5",
-    "react-dropzone": "10.1.4"
+    "typescript": "3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,17 +35,18 @@
   ],
   "devDependencies": {
     "@types/enzyme": "3.9.2",
-    "@types/react-router-dom": "4.3.3",
     "@types/jest": "24.0.13",
     "@types/node": "11.13.11",
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
+    "@types/react-router-dom": "4.3.3",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.13.0",
-    "enzyme-to-json": "3.3.5"
+    "enzyme-to-json": "3.3.5",
+    "react-testing-library": "^7.0.0"
   },
   "resolutions": {
     "@types/react": "16.8.17",
-    "babel-jest": "24.7.1"
+    "babel-jest": "24.8.0"
   }
 }
