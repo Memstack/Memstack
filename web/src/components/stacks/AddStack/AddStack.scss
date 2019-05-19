@@ -26,5 +26,57 @@
       width: 100%;
       height: 40px;
     }
+
+    // Actual input element
+    section > div {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-upload {
+      width: 100%;
+      height: ($stack-height / 5);
+      background-color: #f2fdff;
+
+      @include media-query(small) {
+        height: $stack-height;
+      }
+
+      border-radius: $card-border-radius;
+      border: 1px dashed #d4d4d5;
+
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+
+      .text {
+        margin: auto auto;
+        text-align: center;
+
+        font-size: 16px;
+        font-weight: 300;
+        color: #3273dc;
+
+        @include media-query(small) {
+          display: flex;
+          flex-direction: column;
+          font-size: 26px;
+        }
+
+        svg {
+          margin-right: 0.8rem;
+          margin-top: -0.2rem;
+
+          @include media-query(small) {
+            font-size: 40px;
+            font-weight: 200;
+            margin: 0 auto 0.7rem auto;
+          }
+        }
+      }
+    }
   }
 }
