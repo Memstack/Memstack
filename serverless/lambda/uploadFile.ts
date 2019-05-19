@@ -1,10 +1,10 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { S3 } from "aws-sdk";
 import "source-map-support/register";
+import uuid from "uuid";
 import { getUserId } from "./utils/getUserId";
 import { getLogger } from "./utils/logger";
 import { clientError, serverError, success } from "./utils/response";
-import uuid from "uuid";
 
 const s3 = new S3({ signatureVersion: "v4" });
 const log = getLogger({ name: "uploadFile" });
@@ -34,7 +34,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
     return clientError({ error: "Unauthorized" });
   }
 
-  log.info("parsing body...");
+  log.info("parsing body");
   const uploadRequest: FileUploadRequest = JSON.parse(event.body);
   const { filename } = uploadRequest;
   if (!filename) {

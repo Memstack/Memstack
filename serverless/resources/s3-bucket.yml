@@ -21,3 +21,8 @@ Resources:
               - s3:GetObject
             Resource:
               Fn::Join: ["", ["arn:aws:s3:::", { "Ref": "StaticSite" }, "/*"]]
+
+  UploadsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:custom.uploadsBucketName}
