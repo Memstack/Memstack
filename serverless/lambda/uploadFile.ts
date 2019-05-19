@@ -26,6 +26,9 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   }
 
   log.info("getting user id");
+
+  log.info({ context: event.requestContext });
+
   const userId = getUserId(event.requestContext);
   if (!userId) {
     return clientError({ error: "Unauthorized" });

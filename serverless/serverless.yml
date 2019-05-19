@@ -89,7 +89,6 @@ functions:
     environment:
       bucket: ${self:custom.uploadsBucketName}
 
-
   getStacks:
     handler: lambda/getStacks.handler
     events:
@@ -120,13 +119,16 @@ functions:
                 stackId: true
                 cardId: true
 
-  authTest:
-    handler: lambda/authTest.handler
+  login:
+    handler: lambda/login.handler
     events:
       - http:
-          method: get
+          method: post
           path: login
-          authorizer: ${self:provider.authorizer}
+    environment:
+      LOGIN_REDIRECT: "https://localhost:3000/login"
+      COGNITO_CLIENT_ID: ${env:COGNITO_CLIENT_ID}
+      COGNITO_CLIENT_SECRET: ${env:COGNITO_CLIENT_SECRET}
 
 resources:
   - ${file(resources/api-gateway.yml)}
@@ -146,6 +148,12 @@ custom:
       "index.html":
         - name: "Cache-Control"
           value: "no-cache"
+
+  cognito:
+    local:
+      loginRedirect: "https://localhost:3000/login"
+    dev:
+      loginRedirect: "https://dev.memstack.io/login"
 
   serverless-offline:
     port: 3001
