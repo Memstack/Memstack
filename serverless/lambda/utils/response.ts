@@ -37,3 +37,6 @@ export const notFound = <T extends ErrorResponse>(body: T) => error(404, body);
 
 export const serverError = <T extends ErrorResponse>(body: T) =>
   error(500, body);
+
+export const unauthorized = () =>
+  error(401, { error: "You are not authorized" });
