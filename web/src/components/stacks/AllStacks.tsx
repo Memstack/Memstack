@@ -14,7 +14,7 @@ const AllStacks = () => {
   const getStacks = async () => {
     try {
       console.log("Getting stacks...");
-      const result = await axios.get<Stacks>(`/stacks`);
+      const result = await axios.get<Stacks>(`/api/stacks`);
       console.log(`result: ${JSON.stringify(result)}`);
       setStacks(result.data && result.data["items"]);
     } catch (err) {

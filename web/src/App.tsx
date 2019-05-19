@@ -37,9 +37,9 @@ const Login: React.FC<RouteChildrenProps> = ({ location: { search } }) => {
   const [uploadUrl, setUploadUrl] = useState("");
 
   const loginFlow = async (code: string) => {
-    await axios.post("/login", { code });
+    await axios.post("/api/login", { code });
 
-    const res = await axios.post<{ url: string }>("/upload", {
+    const res = await axios.post<{ url: string }>("/api/upload", {
       filename: "foobar.jpg"
     });
 
