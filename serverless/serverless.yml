@@ -12,6 +12,7 @@ provider:
   name: aws
   runtime: nodejs10.x
   profile: memstack
+  stage: ${opt:stage, 'dev'}
   environment:
     TABLE_NAME: Memstack
   apiKeys:
@@ -19,6 +20,10 @@ provider:
   region: eu-west-2
   apiGateway:
     restApiId: !Ref ApiGatewayRestApi
+  authorizer:
+    name: authorizer
+    identitySource: method.request.header.Authorization
+    arn: arn:aws:cognito-idp:eu-west-2:145787944847:userpool/eu-west-2_94cWFJlSO
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -74,6 +79,17 @@ functions:
           method: post
           path: stacks
 
+  uploadFile:
+    handler: lambda/uploadFile.handler
+    events:
+      - http:
+          method: post
+          path: upload
+          authorizer: ${self:provider.authorizer}
+    environment:
+      bucket: ${self:custom.uploadsBucketName}
+
+
   getStacks:
     handler: lambda/getStacks.handler
     events:
@@ -110,10 +126,7 @@ functions:
       - http:
           method: get
           path: login
-          authorizer:
-            name: authorizer
-            identitySource: method.request.header.Authorization
-            arn: arn:aws:cognito-idp:eu-west-2:145787944847:userpool/eu-west-2_94cWFJlSO
+          authorizer: ${self:provider.authorizer}
 
 resources:
   - ${file(resources/api-gateway.yml)}
@@ -123,6 +136,8 @@ resources:
 
 custom:
   siteBucketName: dev.memstack.io
+  uploadsBucketName: ${self:provider.stage}-memstack-uploads
+
   client:
     manageResources: false
     bucketName: dev.memstack.io
