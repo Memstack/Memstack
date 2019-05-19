@@ -1,9 +1,12 @@
 import { APIGatewayEventRequestContext } from "aws-lambda";
 
 export const getUserId = (requestContext: APIGatewayEventRequestContext) => {
-  const { authorizer } = requestContext;
-  if (authorizer) {
-    return authorizer.claims.sub;
+  try {
+    const { authorizer } = requestContext;
+    if (authorizer) {
+      return authorizer.claims.sub;
+    }
+  } catch {
+    return null;
   }
-  return null;
 };
