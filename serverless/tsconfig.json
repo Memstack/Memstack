@@ -1,10 +1,10 @@
 {
   "extends": "../tsconfig-base.json",
   "compilerOptions": {
-    "lib": ["es2017", "dom"],
+    "lib": ["es2018", "dom"],
     "noUnusedParameters": true,
-    "target": "es2017",
-    "outDir": "lib",
+    "target": "es2018",
+    "outDir": "lib"
   },
   "include": ["./lambda/**/*"],
   "exclude": ["node_modules", "./lambda/**/*.test.ts"]
