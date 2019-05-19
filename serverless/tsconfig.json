@@ -7,5 +7,5 @@
     "outDir": "lib"
   },
   "include": ["./lambda/**/*"],
-  "exclude": ["node_modules", "./lambda/**/*.test.ts"]
+  "exclude": ["node_modules"]
 }
