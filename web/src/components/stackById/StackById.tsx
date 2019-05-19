@@ -2,27 +2,25 @@ import React, { useState, useEffect } from "react";
 import { RouteChildrenProps } from "react-router";
 import axios from "axios";
 import "./StackById.scss";
+import { Stack, Card } from "../../../../schema/lib";
 
 type StackByIdProps = RouteChildrenProps<{ id: string }>;
 
-interface Card {
-  StackId: string;
-  CardStackInfo: string;
-  Front: string;
-  Back: string;
+interface GetStackResponse extends Stack {
+  cards: Card[];
 }
 
-type Cards = Card[];
-
 const StackById: React.FC<StackByIdProps> = ({ match }) => {
-  const [cards, setCards] = useState<Cards>([]);
+  const [stack, setStack] = useState<GetStackResponse | null>(null);
 
-  const getCards = async () => {
+  const getStack = async () => {
     if (match) {
       try {
-        const result = await axios.get<Cards>(`/api/stacks/${match.params.id}`);
+        const result = await axios.get<GetStackResponse>(
+          `/api/stacks/${match.params.id}`
+        );
 
-        setCards(result.data);
+        setStack(result.data);
       } catch (err) {
         console.error("Failed to get cards", err);
       }
@@ -30,23 +28,28 @@ const StackById: React.FC<StackByIdProps> = ({ match }) => {
   };
 
   useEffect(() => {
-    getCards();
+    getStack();
   }, []);
 
   return (
     <div className="StackById centered">
-      <h1>Stack {match && match.params.id}</h1>
-      <ul>
-        {cards.length ? (
-          cards.map(c => (
-            <li key={c.CardStackInfo}>
-              <b>{c.Front}</b>: {c.Back}
-            </li>
-          ))
-        ) : (
-          <p>No cards in this stack</p>
-        )}
-      </ul>
+      {stack ? (
+        <>
+          <h1>{stack.title}</h1>
+          <h4>{stack.description}</h4>
+          <ul>
+            {stack.cards.length ? (
+              stack.cards.map(c => (
+                <li key={c.id}>
+                  <b>{c.front}</b>: {c.back}
+                </li>
+              ))
+            ) : (
+              <p>No cards in this stack</p>
+            )}
+          </ul>
+        </>
+      ) : null}
     </div>
   );
 };

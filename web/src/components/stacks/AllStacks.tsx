@@ -38,7 +38,7 @@ const AllStacks = () => {
         </Link>
         {stacks.map((stack, idx) => (
           <Stack
-            id={(idx + 1).toString()}
+            id={stack.id}
             name={stack.title}
             img={stack.image}
             meta={""}
