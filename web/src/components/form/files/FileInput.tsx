@@ -1,5 +1,5 @@
 import { FieldProps, FormikProps } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { Form, Label } from "semantic-ui-react";
 
@@ -27,10 +27,15 @@ export const FileInput: React.FC<FileInputProps> = ({
   placeholder,
   icon
 }) => {
-  const onDrop = acceptedFile => {
+  const [currentFilename, setCurrentFilename] = useState<string>();
+
+  const onDrop = (acceptedFiles: File[]) => {
+    const acceptedFile = acceptedFiles[0];
     form.setFieldValue(name, acceptedFile);
     form.setFieldTouched(name, true);
+    setCurrentFilename(acceptedFile.name);
   };
+
   return (
     <Form.Field>
       <label>{label}</label>
@@ -45,7 +50,7 @@ export const FileInput: React.FC<FileInputProps> = ({
               <input {...getInputProps()} />
               <div className="text">
                 {icon && <i className={icon} />}
-                {placeholder || ""}
+                {currentFilename ? currentFilename : placeholder}
               </div>
             </div>
           )}
