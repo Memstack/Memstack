@@ -9,7 +9,11 @@ describe("TopMenu", () => {
   });
 
   it("matches snapshot", () => {
-    const wrapper = shallow(<TopMenu />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <TopMenu />
+      </MemoryRouter>
+    );
     expect(wrapper).toMatchSnapshot();
   });
 

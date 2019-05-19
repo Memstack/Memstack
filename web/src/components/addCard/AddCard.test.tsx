@@ -1,9 +1,14 @@
 import React from "react";
 import AddCard from "./AddCard";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
+import { MemoryRouter } from "react-router";
 
 describe("AddCard", () => {
   it("renders without crashing", () => {
-    mount(<AddCard />);
+    mount(
+      <MemoryRouter initialEntries={["/"]}>
+        <AddCard />
+      </MemoryRouter>
+    );
   });
 });
