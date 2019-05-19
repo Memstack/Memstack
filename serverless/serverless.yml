@@ -104,6 +104,17 @@ functions:
                 stackId: true
                 cardId: true
 
+  authTest:
+    handler: lambda/authTest.handler
+    events:
+      - http:
+          method: get
+          path: login
+          authorizer:
+            name: authorizer
+            identitySource: method.request.header.Authorization
+            arn: arn:aws:cognito-idp:eu-west-2:145787944847:userpool/eu-west-2_94cWFJlSO
+
 resources:
   - ${file(resources/api-gateway.yml)}
   - ${file(resources/dynamodb-table.yml)}

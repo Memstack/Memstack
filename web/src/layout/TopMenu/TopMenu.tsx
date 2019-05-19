@@ -60,6 +60,14 @@ class TopMenu extends React.Component<{}, ITopMenuState> {
                 key={idx}
               />
             ))}
+            <a href="https://memstack-dev.auth.eu-west-2.amazoncognito.com/login?response_type=code&client_id=3pe23g9hu3rs1a4c9ua7ic8ebh&redirect_uri=https://localhost:3000/login">
+              <div className={"item"}>
+                <span className="icon">
+                  <i className={"fas fa-user"} />
+                </span>
+                <span className={"menu-text"}>Login</span>
+              </div>
+            </a>
           </div>
         </div>
       </nav>
