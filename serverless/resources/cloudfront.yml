@@ -57,11 +57,6 @@ Resources:
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2018
         Enabled: true
-        CustomErrorResponses:
-          - ErrorCode: 404
-            ResponseCode: 200
-            ResponsePagePath: "/index.html"
-            ErrorCachingMinTTL: 0
 
   CloudFrontDNSRecord:
     Type: AWS::Route53::RecordSet
