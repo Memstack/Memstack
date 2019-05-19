@@ -121,6 +121,9 @@ custom:
         - name: "Cache-Control"
           value: "no-cache"
 
+  serverless-offline:
+    port: 3001
+
   dynamodb:
     start:
       migrate: true
