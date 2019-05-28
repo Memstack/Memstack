@@ -36,7 +36,7 @@
     "@types/enzyme": "3.9.2",
     "@types/jest": "24.0.13",
     "@types/node": "11.13.11",
-    "@types/react": "16.8.17",
+    "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "4.3.3",
     "enzyme": "3.9.0",
@@ -45,7 +45,7 @@
     "http-proxy-middleware": "^0.19.1"
   },
   "resolutions": {
-    "@types/react": "16.8.17",
+    "@types/react": "16.8.19",
     "babel-jest": "24.8.0"
   }
 }
