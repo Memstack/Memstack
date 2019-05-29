@@ -7,7 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/yup": "0.26.13",
-    "typescript": "3.4.5"
+    "typescript": "3.5.1"
   },
   "scripts": {
     "build": "tsc --build"
