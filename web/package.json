@@ -42,7 +42,7 @@
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.13.0",
     "enzyme-to-json": "3.3.5",
-    "http-proxy-middleware": "^0.19.1"
+    "http-proxy-middleware": "0.19.1"
   },
   "resolutions": {
     "@types/react": "16.8.17",
