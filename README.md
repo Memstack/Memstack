@@ -18,7 +18,17 @@ yarn db:install
 yarn db:start
 ```
 
-3. Start Serverless offline
+3. Install dependencies
+
+```
+cd schema
+yarn
+cd ../web
+yarn
+```
+
+
+4. Start Serverless offline
 
 ```
 yarn start
