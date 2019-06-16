@@ -24,7 +24,7 @@ const authCodeRequestSchema = yup.object<AuthCodeRequest>({
 
 const log = getLogger({ name: "login" });
 
-const loginRedirect = "https://localhost:3000/login";
+const loginRedirect = getEnv("LOGIN_REDIRECT");
 const clientId = getEnv("COGNITO_CLIENT_ID");
 const clientSecret = getEnv("COGNITO_CLIENT_SECRET");
 

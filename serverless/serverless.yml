@@ -126,7 +126,7 @@ functions:
           method: post
           path: login
     environment:
-      LOGIN_REDIRECT: "https://localhost:3000/login"
+      LOGIN_REDIRECT: ${self:custom.cognito.${self:provider.stage}.loginRedirect}
       COGNITO_CLIENT_ID: ${env:COGNITO_CLIENT_ID}
       COGNITO_CLIENT_SECRET: ${env:COGNITO_CLIENT_SECRET}
 
@@ -143,7 +143,7 @@ custom:
   client:
     manageResources: false
     bucketName: dev.memstack.io
-    distributionFolder: web/build/
+    distributionFolder: ../web/build/
     objectHeaders:
       "index.html":
         - name: "Cache-Control"
