@@ -49,8 +49,6 @@ const Login: React.FC<RouteChildrenProps> = ({ location: { search } }) => {
   useEffect(() => {
     const code = new URLSearchParams(search).get("code");
 
-    console.log("Code", code);
-
     if (!code) {
       setMessage("No code provided");
     } else {
