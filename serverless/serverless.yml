@@ -125,6 +125,10 @@ functions:
       - http:
           method: post
           path: login
+          integration: lambda
+          response:
+            headers:
+              Set-Cookie: integration.response.body.Cookie
     environment:
       LOGIN_REDIRECT: ${self:custom.cognito.${self:provider.stage}.loginRedirect}
       COGNITO_CLIENT_ID: ${env:COGNITO_CLIENT_ID}

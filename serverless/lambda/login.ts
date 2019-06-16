@@ -63,16 +63,24 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
       key: "Authorization",
       value: `Bearer ${id_token}`,
       secure: true,
-      httpOnly: true
+      httpOnly: true,
+      domain: "https://dev.memstack.io/"
     });
 
     /*eslint-enable */
 
-    return {
-      headers: { "Set-Cookie": cookie.toString() },
+    const response = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
       statusCode: 200,
-      body: ""
+      body: JSON.stringify({ Cookie: cookie.toString() })
     };
+
+    log.info({ cookie, response });
+
+    return response;
   } catch (err) {
     const error = err as AxiosError;
 
