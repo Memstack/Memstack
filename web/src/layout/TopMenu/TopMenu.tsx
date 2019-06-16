@@ -30,6 +30,8 @@ class TopMenu extends React.Component<{}, ITopMenuState> {
   };
 
   render() {
+    const location = new URL(window.location.href);
+
     return (
       <nav className="Navbar">
         <div className="main">
@@ -60,7 +62,11 @@ class TopMenu extends React.Component<{}, ITopMenuState> {
                 key={idx}
               />
             ))}
-            <a href="https://memstack-dev.auth.eu-west-2.amazoncognito.com/login?response_type=code&client_id=3pe23g9hu3rs1a4c9ua7ic8ebh&redirect_uri=https://localhost:3000/login">
+            <a
+              href={`https://memstack-dev.auth.eu-west-2.amazoncognito.com/login?response_type=code&client_id=3pe23g9hu3rs1a4c9ua7ic8ebh&redirect_uri=https://${
+                location.host
+              }/login`}
+            >
               <div className={"item"}>
                 <span className="icon">
                   <i className={"fas fa-user"} />
